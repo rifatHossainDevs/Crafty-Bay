@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "193241607977",
+    "firebase_url": "https://online-coffee-shop-b67e3-default-rtdb.firebaseio.com",
+    "project_id": "online-coffee-shop-b67e3",
+    "storage_bucket": "online-coffee-shop-b67e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193241607977:android:49ebd359959a9d63045138",
+        "android_client_info": {
+          "package_name": "com.esports.onlinecoffeeshop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpneDJlz78nTTMEmGsLCqoU0S0M1vd6GM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193241607977:android:91eef7ba933d27a0045138",
+        "android_client_info": {
+          "package_name": "com.example.crafty_bay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpneDJlz78nTTMEmGsLCqoU0S0M1vd6GM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
