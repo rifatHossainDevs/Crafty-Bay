@@ -5,15 +5,16 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'app/crafty_bay_app.dart';
 import 'firebase_options.dart';
 
 
 // Initialization FVM -> Done
-// Folder structure
+// Folder structure -> Done
 // Firebase Set up -> Done
 // Crashlytics -> Done
 // Analytics -> Done
-// Theming
+// Theming -> Done
 // Localization
 // Provider
 
@@ -34,15 +35,5 @@ Future<void> main() async {
     return true;
   };
 
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp();
-  }
+  runApp(const CraftyBayApp());
 }
