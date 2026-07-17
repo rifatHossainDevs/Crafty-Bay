@@ -1,4 +1,5 @@
 import 'package:crafty_bay/app/providers/locale_provider.dart';
+import 'package:crafty_bay/app/providers/theme_provider.dart';
 import 'package:crafty_bay/app/routes.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -19,25 +20,29 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LocaleProvider>(
-      builder: (context, localProvider, _) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Crafty Bay",
-          initialRoute: SplashScreen.name,
-          onGenerateRoute: AppRoutes.onGenerateRoute,
-          theme: AppTheme.lightTheme,
-          localizationsDelegates: [
-            // Add this line
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: localProvider.supportedLocales,
-          locale: localProvider.currentLocale,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: ThemeMode.light,
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, _) {
+        return Consumer<LocaleProvider>(
+          builder: (context, localProvider, _) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: "Crafty Bay",
+              initialRoute: SplashScreen.name,
+              onGenerateRoute: AppRoutes.onGenerateRoute,
+              theme: AppTheme.lightTheme,
+              localizationsDelegates: [
+                // Add this line
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: localProvider.supportedLocales,
+              locale: localProvider.currentLocale,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: themeProvider.currentTheme,
+            );
+          }
         );
       }
     );

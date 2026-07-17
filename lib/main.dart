@@ -1,4 +1,5 @@
 import 'package:crafty_bay/app/providers/locale_provider.dart';
+import 'package:crafty_bay/app/providers/theme_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -29,12 +30,17 @@ Future<void> main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
-  final localeProvider = LocaleProvider();
+  final LocaleProvider localeProvider = LocaleProvider();
+  final ThemeProvider themeProvider = ThemeProvider();
   await localeProvider.init();
+  await themeProvider.init();
 
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: localeProvider)],
+      providers: [
+        ChangeNotifierProvider.value(value: localeProvider),
+        ChangeNotifierProvider.value(value: themeProvider),
+      ],
       child: const CraftyBayApp(),
     ),
   );
