@@ -1,11 +1,12 @@
 import 'package:crafty_bay/app/app_colors.dart';
-import 'package:crafty_bay/app/extension/localization_extension.dart';
 import 'package:crafty_bay/app/providers/locale_provider.dart';
 import 'package:crafty_bay/app/providers/theme_provider.dart';
 import 'package:crafty_bay/app/utils.dart';
+import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/extension/utility_extension.dart';
 import '../widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,6 +19,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+
+  @override
+  void initState() {
+    super.initState();
+    _moveToNextScreen();
+  }
+
+  Future<void> _moveToNextScreen() async{
+    await Future.delayed(Duration(seconds: 2));
+    Navigator.pushNamedAndRemoveUntil(context, SignUpScreens.name, (predicate)=> false);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final localization = context.localization;
@@ -102,7 +117,6 @@ class LocalChangerDropdown extends StatelessWidget {
   }
 }
 
-
 class ThemeChangerDropdown extends StatelessWidget {
   const ThemeChangerDropdown({super.key});
 
@@ -140,7 +154,11 @@ class ThemeChangerDropdown extends StatelessWidget {
                   value: e,
                   child: Row(
                     children: [
-                      Icon(Utils.getThemeIcon(e), color: Colors.white, size: 20),
+                      Icon(
+                        Utils.getThemeIcon(e),
+                        color: Colors.white,
+                        size: 20,
+                      ),
                       const SizedBox(width: 12),
                       Text(e.name.toUpperCase()),
                     ],

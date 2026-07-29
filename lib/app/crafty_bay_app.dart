@@ -17,34 +17,35 @@ class CraftyBayApp extends StatefulWidget {
 }
 
 class _CraftyBayAppState extends State<CraftyBayApp> {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return Consumer<LocaleProvider>(
           builder: (context, localProvider, _) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: "Crafty Bay",
-              initialRoute: SplashScreen.name,
-              onGenerateRoute: AppRoutes.onGenerateRoute,
-              theme: AppTheme.lightTheme,
-              localizationsDelegates: [
-                // Add this line
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: localProvider.supportedLocales,
-              locale: localProvider.currentLocale,
-              darkTheme: AppTheme.darkTheme,
-              themeMode: themeProvider.currentTheme,
+            return SafeArea(
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: "Crafty Bay",
+                initialRoute: SplashScreen.name,
+                onGenerateRoute: AppRoutes.onGenerateRoute,
+                theme: AppTheme.lightTheme,
+                localizationsDelegates: [
+                  // Add this line
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: localProvider.supportedLocales,
+                locale: localProvider.currentLocale,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: themeProvider.currentTheme,
+              ),
             );
-          }
+          },
         );
-      }
+      },
     );
   }
 }

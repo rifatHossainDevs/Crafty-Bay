@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../features/auth/presentation/screens/sign_up_screens.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
 
 class AppRoutes {
@@ -9,6 +10,8 @@ class AppRoutes {
     switch (settings.name) {
       case SplashScreen.name:
         widget = SplashScreen();
+      case SignUpScreens.name:
+        widget = SignUpScreens();
     }
 
     return MaterialPageRoute(builder: (_) => widget);
