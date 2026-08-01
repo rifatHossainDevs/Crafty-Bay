@@ -1,3 +1,4 @@
+import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screens.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(32),
           child: Center(
             child: Form(
               key: _formKey,
@@ -172,7 +173,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
   }
 
   void _onTapSignInButton() {
-
+    Navigator.pushNamed(context, SignInScreens.name);
   }
 
   @override

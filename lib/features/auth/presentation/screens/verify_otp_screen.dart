@@ -18,12 +18,12 @@ class VerifyOtpScreen extends StatefulWidget {
 }
 
 class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
-
   @override
   void initState() {
     super.initState();
     _resendOtpProvider.startResendOtpTimer();
   }
+
   final PinInputController _otpTEController = PinInputController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -82,7 +82,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                     ),
 
                     const SizedBox(height: 16),
-                    ResendOtpSection()
+                    ResendOtpSection(),
                   ],
                 ),
               ),
