@@ -1,3 +1,4 @@
+import 'package:crafty_bay/features/auth/presentation/screens/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../features/auth/presentation/screens/sign_up_screens.dart';
@@ -12,6 +13,8 @@ class AppRoutes {
         widget = SplashScreen();
       case SignUpScreens.name:
         widget = SignUpScreens();
+      case VerifyOtpScreen.name:
+        widget = VerifyOtpScreen();
     }
 
     return MaterialPageRoute(builder: (_) => widget);

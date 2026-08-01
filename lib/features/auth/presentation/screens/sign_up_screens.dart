@@ -1,3 +1,4 @@
+import 'package:crafty_bay/features/auth/presentation/screens/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/extension/utility_extension.dart';
@@ -56,7 +57,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       hint: Text("Email"),
                       suffixIcon: IconButton(
                         onPressed: () => _clearData(_emailTEController),
-                        icon: Icon(Icons.cancel_outlined),
+                        icon: Icon(Icons.cancel),
                       ),
                     ),
                     validator: Validators.validateEmail,
@@ -69,7 +70,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       hint: Text("First Name"),
                       suffixIcon: IconButton(
                         onPressed: () => _clearData(_firstNameTEController),
-                        icon: Icon(Icons.cancel_outlined),
+                        icon: Icon(Icons.cancel),
                       ),
                     ),
                     validator: (input) => Validators.validateText(
@@ -85,7 +86,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       hint: Text("Last Name"),
                       suffixIcon: IconButton(
                         onPressed: () => _clearData(_lastNameTEController),
-                        icon: Icon(Icons.cancel_outlined),
+                        icon: Icon(Icons.cancel),
                       ),
                     ),
                     validator: (input) => Validators.validateText(
@@ -102,7 +103,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       hint: Text("Mobile"),
                       suffixIcon: IconButton(
                         onPressed: () => _clearData(_mobileTEController),
-                        icon: Icon(Icons.cancel_outlined),
+                        icon: Icon(Icons.cancel),
                       ),
                     ),
                     validator: Validators.validatePhoneNumber,
@@ -115,7 +116,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       hint: Text("City"),
                       suffixIcon: IconButton(
                         onPressed: () => _clearData(_cityTEController),
-                        icon: Icon(Icons.cancel_outlined),
+                        icon: Icon(Icons.cancel),
                       ),
                     ),
                     validator: (input) => Validators.validateText(
@@ -133,8 +134,8 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       suffixIcon: IconButton(
                         onPressed: _changePasswordVisibility,
                         icon: isObscurePassword
-                            ? Icon(Icons.visibility)
-                            : Icon(Icons.visibility_off),
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility),
                       ),
                     ),
 
@@ -146,6 +147,21 @@ class _SignUpScreensState extends State<SignUpScreens> {
                     onPressed: _onTapSignUpButton,
                     child: Text("Sign Up"),
                   ),
+
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        context.localization.alreadyHaveAnAccount,
+                        style: context.textTheme.labelLarge,
+                      ),
+                      TextButton(
+                        onPressed: _onTapSignInButton,
+                        child: Text(context.localization.signIn),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -153,6 +169,21 @@ class _SignUpScreensState extends State<SignUpScreens> {
         ),
       ),
     );
+  }
+
+  void _onTapSignInButton() {
+
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailTEController.dispose();
+    _firstNameTEController.dispose();
+    _lastNameTEController.dispose();
+    _mobileTEController.dispose();
+    _cityTEController.dispose();
+    _passwordTEController.dispose();
   }
 
   void _clearData(TextEditingController textEditingController) {
@@ -165,5 +196,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
     });
   }
 
-  void _onTapSignUpButton() {}
+  void _onTapSignUpButton() {
+    Navigator.pushNamed(context, VerifyOtpScreen.name);
+  }
 }
