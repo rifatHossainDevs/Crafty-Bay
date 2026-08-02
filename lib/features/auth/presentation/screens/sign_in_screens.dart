@@ -1,4 +1,5 @@
 import 'package:crafty_bay/features/auth/presentation/widgets/app_logo.dart';
+import 'package:crafty_bay/features/shared/presentation/screens/main_nav_holder_screens.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/extension/utility_extension.dart';
@@ -104,7 +105,13 @@ class _SignInScreensState extends State<SignInScreens> {
     );
   }
 
-  void _onTapSignInButton() {}
+  void _onTapSignInButton() {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      MainNavHolderScreens.name,
+      (_) => false,
+    );
+  }
 
   @override
   void dispose() {

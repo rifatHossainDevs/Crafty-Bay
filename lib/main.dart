@@ -1,5 +1,6 @@
 import 'package:crafty_bay/app/providers/locale_provider.dart';
 import 'package:crafty_bay/app/providers/theme_provider.dart';
+import 'package:crafty_bay/features/shared/presentation/providers/main_nav_holder_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -40,6 +41,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider.value(value: localeProvider),
         ChangeNotifierProvider.value(value: themeProvider),
+        ChangeNotifierProvider(create: (_) => MainNavHolderProvider()),
       ],
       child: const CraftyBayApp(),
     ),

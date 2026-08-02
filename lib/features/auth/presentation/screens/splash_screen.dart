@@ -3,6 +3,7 @@ import 'package:crafty_bay/app/providers/locale_provider.dart';
 import 'package:crafty_bay/app/providers/theme_provider.dart';
 import 'package:crafty_bay/app/utils.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screens.dart';
+import 'package:crafty_bay/features/shared/presentation/screens/main_nav_holder_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushNamedAndRemoveUntil(context, SignUpScreens.name, (predicate)=> false);
+    Navigator.pushNamedAndRemoveUntil(context, MainNavHolderScreens.name, (predicate)=> false);
   }
 
 
