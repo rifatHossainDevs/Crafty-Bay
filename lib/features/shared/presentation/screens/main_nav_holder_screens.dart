@@ -1,3 +1,4 @@
+import 'package:crafty_bay/app/extension/utility_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,18 +40,18 @@ class _MainNavHolderScreensState extends State<MainNavHolderScreens> {
             showSelectedLabels: true,
             showUnselectedLabels: true,
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: context.localization.home),
               BottomNavigationBarItem(
                 icon: Icon(Icons.category),
-                label: "Category",
+                label: context.localization.category,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart),
-                label: "Cart",
+                label: context.localization.cart,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.favorite),
-                label: "Wishlist",
+                label: context.localization.wishlist,
               ),
             ],
           ),

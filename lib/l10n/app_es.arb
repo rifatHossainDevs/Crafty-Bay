@@ -2,5 +2,9 @@
   "version": "Versión: 1.0.0",
   "alreadyHaveAnAccount": "¿Ya tienes una cuenta?",
   "signIn": "Iniciar sesión",
-  "next": "Siguiente"
+  "next": "Siguiente",
+  "home": "Inicio",
+  "category": "Categoría",
+  "cart": "Carrito",
+  "wishlist": "Lista de deseos"
 }

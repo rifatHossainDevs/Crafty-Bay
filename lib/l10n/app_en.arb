@@ -2,6 +2,10 @@
   "version": "Version: 1.0.0",
   "alreadyHaveAnAccount": "Already have an account?",
   "signIn": "Sign in",
-  "next": "Next"
+  "next": "Next",
+  "home": "Home",
+  "category": "Category",
+  "cart": "Cart",
+  "wishlist": "Wishlist"
 
 }
