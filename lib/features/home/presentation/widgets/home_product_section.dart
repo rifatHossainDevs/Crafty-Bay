@@ -9,22 +9,16 @@ class HomeProductSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProductItem();
-  }
-}
-
-class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
     return SizedBox(
-      height: 216,
+      height: 192,
       child: ListView.builder(
         itemCount: 10,
         scrollDirection: .horizontal,
         itemBuilder: (context, index) {
-          return ProductItems();
+          return SizedBox(width: 144, child: Padding(
+            padding: const EdgeInsets.only(right: 4),
+            child: ProductItem(),
+          ));
         },
       ),
     );

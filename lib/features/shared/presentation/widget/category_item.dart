@@ -1,3 +1,4 @@
+import 'package:crafty_bay/features/products/presentation/screens/products_by_category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -10,30 +11,35 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: .all(20),
-          alignment: .center,
-          decoration: BoxDecoration(
-            color: AppColors.themeColor.withAlpha(30),
-            borderRadius: .circular(12),
+    return GestureDetector(
+      onTap: (){
+        Navigator.pushNamed(context, ProductsByCategoryScreen.name, arguments: 'Electronics');
+      },
+      child: Column(
+        children: [
+          Container(
+            padding: .all(20),
+            alignment: .center,
+            decoration: BoxDecoration(
+              color: AppColors.themeColor.withAlpha(30),
+              borderRadius: .circular(12),
+            ),
+            child: SvgPicture.asset(
+              AssetsPaths.electronicsSvg,
+              width: 44,
+              height: 44,
+            ),
           ),
-          child: SvgPicture.asset(
-            AssetsPaths.electronicsSvg,
-            width: 44,
-            height: 44,
+          const SizedBox(height: 8),
+          Text(
+            _getTitle("Electronics"),
+            style: context.textTheme.bodyLarge?.copyWith(
+              color: AppColors.themeColor,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          _getTitle("Electronics"),
-          style: context.textTheme.bodyLarge?.copyWith(
-            color: AppColors.themeColor,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
