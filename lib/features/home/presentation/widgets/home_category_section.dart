@@ -8,7 +8,7 @@ class HomeCategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 124,
+      height: 116,
       child: ListView.separated(
         scrollDirection: .horizontal,
         itemCount: 4,

@@ -21,8 +21,8 @@ class CategoryItem extends StatelessWidget {
           ),
           child: SvgPicture.asset(
             AssetsPaths.electronicsSvg,
-            width: 48,
-            height: 48,
+            width: 44,
+            height: 44,
           ),
         ),
         const SizedBox(height: 8),

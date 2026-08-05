@@ -8,18 +8,16 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8, right: 16, left: 8),
-      child: AppBar(
-        title: SvgPicture.asset(AssetsPaths.navLogoSvg),
-        actions: [
-          _buildIconButton(icon: Icons.person_outline, onTap: () {}),
-          const SizedBox(width: 8,),
-          _buildIconButton(icon: Icons.add_ic_call_outlined, onTap: () {}),
-          const SizedBox(width: 8,),
-          _buildIconButton(icon: Icons.notifications_active_outlined, onTap: () {}),
-        ],
-      ),
+    return AppBar(
+      title: SvgPicture.asset(AssetsPaths.navLogoSvg),
+      actions: [
+        _buildIconButton(icon: Icons.person_outline, onTap: () {}),
+        const SizedBox(width: 8,),
+        _buildIconButton(icon: Icons.add_ic_call_outlined, onTap: () {}),
+        const SizedBox(width: 8,),
+        _buildIconButton(icon: Icons.notifications_active_outlined, onTap: () {}),
+        const SizedBox(width: 16,)
+      ],
     );
   }
 

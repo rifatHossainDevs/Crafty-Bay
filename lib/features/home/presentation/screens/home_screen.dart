@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -5,6 +6,7 @@ import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/home_carousel_slider.dart';
 import '../widgets/home_category_section.dart';
+import '../widgets/home_product_section.dart';
 import '../widgets/home_search_bar.dart';
 import '../widgets/home_section_header.dart';
 
@@ -39,6 +41,13 @@ class _HomeScreenState extends State<HomeScreen> {
               HomeCategorySection(),
               const SizedBox(height: 8),
               HomeSectionHeader(title: "Popular", onTapSeeAll: () {}),
+              const HomeProductSection(products: [],),
+              const SizedBox(height: 8),
+              HomeSectionHeader(title: "Special", onTapSeeAll: () {}),
+              const HomeProductSection(products: [],),
+              const SizedBox(height: 8),
+              HomeSectionHeader(title: "New", onTapSeeAll: () {}),
+              const HomeProductSection(products: [],)
             ],
           ),
         ),
