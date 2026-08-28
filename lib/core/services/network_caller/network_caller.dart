@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
+part 'network_response.dart';
+
 class NetworkCaller {
   final Logger _logger = Logger();
 
@@ -31,7 +33,7 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
-          body: decodedJson['message'],
+          body: decodedJson['msg'],
         );
       }
     } catch (e) {
@@ -51,7 +53,7 @@ class NetworkCaller {
   }) async {
     try {
       Uri uri = Uri.parse(url);
-      _logRequest(url);
+      _logRequest(url, body: body);
 
       Response response = await post(
         uri,
@@ -73,7 +75,7 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
-          body: decodedJson['message'],
+          body: decodedJson['msg'],
         );
       }
     } catch (e) {
@@ -87,8 +89,10 @@ class NetworkCaller {
     }
   }
 
-  void _logRequest(String url) {
-    _logger.i('Request URL: $url');
+  void _logRequest(String url, {Map<String, dynamic>? body}) {
+    _logger.i('''Request URL: $url
+    Body: $body
+    ''');
   }
 
   void _logResponse(Response response, {bool isError = false}) {
@@ -104,18 +108,4 @@ class NetworkCaller {
       Body => ${response.body}''');
     }
   }
-}
-
-class NetworkResponse {
-  final bool isSuccess;
-  final int statusCode;
-  final String? errorMessage;
-  final dynamic body;
-
-  NetworkResponse({
-    required this.isSuccess,
-    required this.statusCode,
-    this.errorMessage,
-    this.body,
-  });
 }

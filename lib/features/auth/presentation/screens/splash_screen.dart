@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushNamedAndRemoveUntil(context, MainNavHolderScreens.name, (predicate)=> false);
+    Navigator.pushNamedAndRemoveUntil(context, SignUpScreens.name, (predicate)=> false);
   }
 
 
