@@ -123,6 +123,8 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     );
     bool isSuccess = await _verifyOtpProvider.verifyOtp(params);
 
+    if(!mounted) return;
+
     if (isSuccess) {
       Navigator.pushNamedAndRemoveUntil(
         context,

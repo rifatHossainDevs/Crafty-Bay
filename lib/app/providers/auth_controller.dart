@@ -15,7 +15,7 @@ class AuthController {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString(_tokenKey, token);
     await sharedPreferences.setString(
-      _tokenKey,
+      _userModelKey,
       jsonEncode(userModel.toJson()),
     );
 
