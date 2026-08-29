@@ -1,0 +1,15 @@
+import 'package:flutter/material.dart';
+
+import '../../../../app/assets_paths.dart';
+
+class NoImage extends StatelessWidget {
+  const NoImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      AssetsPaths.noImagePng,
+      fit: .scaleDown,
+    );
+  }
+}

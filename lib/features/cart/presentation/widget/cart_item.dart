@@ -53,7 +53,7 @@ class CartItem extends StatelessWidget {
                         onPressed: () {},
                         icon: Icon(
                           Icons.delete_outline,
-                          color: Colors.black54,
+                          color: Colors.red.shade400,
                         ),
                       ),
                     ],

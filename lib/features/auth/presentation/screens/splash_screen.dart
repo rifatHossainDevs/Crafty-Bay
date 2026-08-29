@@ -3,8 +3,6 @@ import 'package:crafty_bay/app/providers/auth_controller.dart';
 import 'package:crafty_bay/app/providers/locale_provider.dart';
 import 'package:crafty_bay/app/providers/theme_provider.dart';
 import 'package:crafty_bay/app/utils.dart';
-import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screens.dart';
-import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screens.dart';
 import 'package:crafty_bay/features/shared/presentation/screens/main_nav_holder_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,19 +28,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async {
     await Future.delayed(Duration(seconds: 2));
+
     if (await AuthController.isLoggedIn()) {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        MainNavHolderScreens.name,
-        (predicate) => false,
-      );
-    } else {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        SignInScreens.name,
-        (predicate) => false,
-      );
+      await AuthController.getUserData();
     }
+
+    if (!mounted) return;
+
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      MainNavHolderScreens.name,
+      (predicate) => false,
+    );
   }
 
   @override
