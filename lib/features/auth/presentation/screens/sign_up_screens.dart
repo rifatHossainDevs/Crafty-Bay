@@ -1,4 +1,3 @@
-
 import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screens.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/verify_otp_screen.dart';
 import 'package:flutter/material.dart';
@@ -206,7 +205,11 @@ class _SignUpScreensState extends State<SignUpScreens> {
 
     final isSuccess = await _signUpProvider.signUp(params);
     if (isSuccess) {
-      Navigator.pushNamed(context, VerifyOtpScreen.name);
+      Navigator.pushNamed(
+        context,
+        VerifyOtpScreen.name,
+        arguments: params.email,
+      );
     } else {
       showSnackBarMessage(context, _signUpProvider.errorMessage!);
     }

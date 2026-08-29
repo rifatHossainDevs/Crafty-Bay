@@ -1,4 +1,5 @@
 import 'package:crafty_bay/app/app_colors.dart';
+import 'package:crafty_bay/app/providers/auth_controller.dart';
 import 'package:crafty_bay/app/providers/locale_provider.dart';
 import 'package:crafty_bay/app/providers/theme_provider.dart';
 import 'package:crafty_bay/app/utils.dart';
@@ -20,19 +21,28 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
   @override
   void initState() {
     super.initState();
     _moveToNextScreen();
   }
 
-  Future<void> _moveToNextScreen() async{
+  Future<void> _moveToNextScreen() async {
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushNamedAndRemoveUntil(context, SignUpScreens.name, (predicate)=> false);
+    if (await AuthController.isLoggedIn()) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        MainNavHolderScreens.name,
+        (predicate) => false,
+      );
+    } else {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        SignUpScreens.name,
+        (predicate) => false,
+      );
+    }
   }
-
 
   @override
   Widget build(BuildContext context) {
