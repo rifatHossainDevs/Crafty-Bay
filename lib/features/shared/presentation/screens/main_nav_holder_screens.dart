@@ -38,6 +38,8 @@ class _MainNavHolderScreensState extends State<MainNavHolderScreens> {
     _homeSlidersProvider.getHomeSliders();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

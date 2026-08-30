@@ -3,7 +3,10 @@ class Urls {
 
   static const String signUpUrl = '$_baseUrl/auth/signup';
 
-  static const String  verifyOtpUrl = '$_baseUrl/auth/verify-otp';
-  static const String  signInUrl = '$_baseUrl/auth/login';
-  static const String  homeSlidersUrl = '$_baseUrl/slides';
+  static const String verifyOtpUrl = '$_baseUrl/auth/verify-otp';
+  static const String signInUrl = '$_baseUrl/auth/login';
+  static const String homeSlidersUrl = '$_baseUrl/slides';
+
+  static String getCategoryListUrls(int pageNo, int pageSize) =>
+      '$_baseUrl/categories?page=$pageNo&count=$pageSize';
 }
