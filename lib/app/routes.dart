@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../features/auth/presentation/screens/sign_up_screens.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
+import '../features/category/data/models/category_model.dart';
 
 class AppRoutes {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -19,14 +20,16 @@ class AppRoutes {
         widget = SignUpScreens();
       case VerifyOtpScreen.name:
         final email = settings.arguments as String;
-        widget = VerifyOtpScreen(email: email,);
+        widget = VerifyOtpScreen(email: email);
       case SignInScreens.name:
         widget = SignInScreens();
       case MainNavHolderScreens.name:
         widget = MainNavHolderScreens();
       case ProductsByCategoryScreen.name:
-        final categoryName = settings.arguments as String;
-        widget = ProductsByCategoryScreen(categoryName: categoryName);
+        final category = settings.arguments as CategoryModel;
+        widget = ProductsByCategoryScreen(
+          category: category,
+        );
       case ProductDetailsScreen.name:
         widget = ProductDetailsScreen();
     }

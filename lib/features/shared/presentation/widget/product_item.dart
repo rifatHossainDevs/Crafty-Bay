@@ -1,90 +1,110 @@
-import 'package:crafty_bay/features/products/presentation/screens/product_details_screen.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
-import '../../../../app/assets_paths.dart';
 import '../../../../app/constants.dart';
+import '../../../products/data/models/product_model.dart';
+import '../../../products/presentation/screens/product_details_screen.dart';
+import 'no_image.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
+  const ProductItem({super.key, required this.productModel});
+
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ProductDetailsScreen.name);
+        Navigator.pushNamed(
+          context,
+          ProductDetailsScreen.name,
+          arguments: productModel.id,
+        );
       },
       child: Card(
-        elevation: 3,
-        shadowColor: AppColors.themeColor.withAlpha(40),
         color: Colors.white,
+        shadowColor: AppColors.themeColor.withAlpha(30),
+        elevation: 3,
         child: Column(
-          crossAxisAlignment: .start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              width: double.infinity,
               decoration: BoxDecoration(
                 color: AppColors.themeColor.withAlpha(20),
-                borderRadius: .only(
-                  topLeft: .circular(8),
-                  topRight: .circular(8),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(8),
                 ),
               ),
-              padding: .all(8),
-              child: Image.asset(AssetsPaths.shoePng, fit: BoxFit.cover),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: CachedNetworkImage(
+                  height: 90,
+                  imageUrl: _getPhotoPath(productModel.photos),
+                  fit: BoxFit.scaleDown,
+                  errorWidget: (_, _, _) => const NoImage(),
+                  progressIndicatorBuilder: (_, _, _) => const NoImage(),
+                ),
+              ),
             ),
-            const SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.all(6),
               child: Column(
-                crossAxisAlignment: .start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Title of product",
+                    productModel.title,
                     maxLines: 1,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: .w500,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
                       color: Colors.black54,
-                      overflow: .ellipsis,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  FittedBox(
-                    child: Row(
-                      mainAxisAlignment: .spaceBetween,
-                      children: [
-                        Text(
-                          "${Constants.takaSign}100",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: .w500,
-                            color: AppColors.themeColor,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Row(
-                          mainAxisAlignment: .spaceBetween,
-                          children: [
-                            Icon(Icons.star, color: Colors.amber, size: 20),
-                            Text("4.8"),
-                          ],
-                        ),
-                        const SizedBox(width: 8),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: .circular(4),
-                          ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${Constants.takaSign}${productModel.currentPrice}',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
                           color: AppColors.themeColor,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2),
-                            child: Icon(
-                              Icons.favorite_border,
-                              color: Colors.white,
-                              size: 16,
+                        ),
+                      ),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          const Icon(Icons.star, size: 14, color: Colors.amber),
+                          Text(
+                            '${productModel.rating}',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black45,
                             ),
                           ),
+                        ],
+                      ),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
                         ),
-                      ],
-                    ),
+                        margin: EdgeInsets.zero,
+                        color: AppColors.themeColor,
+                        child: const Padding(
+                          padding: EdgeInsets.all(2.0),
+                          child: Icon(
+                            Icons.favorite_border,
+                            size: 10,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -93,5 +113,9 @@ class ProductItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getPhotoPath(List<String> photos) {
+    return photos.length > 0 ? photos.first : '';
   }
 }

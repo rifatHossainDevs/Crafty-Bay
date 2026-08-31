@@ -68,7 +68,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         mainAxisSpacing: 12,
                       ),
                       itemBuilder: (context, index) {
-                        return FittedBox(child: CategoryItem(category: categoryListProvider.categories[index],));
+                        return FittedBox(
+                          child: CategoryItem(
+                            category: categoryListProvider.categories[index],
+                          ),
+                        );
                       },
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../products/data/models/product_model.dart';
 import '../../../shared/presentation/widget/product_item.dart';
 
 class HomeProductSection extends StatelessWidget {
@@ -15,10 +16,22 @@ class HomeProductSection extends StatelessWidget {
         itemCount: 10,
         scrollDirection: .horizontal,
         itemBuilder: (context, index) {
-          return SizedBox(width: 144, child: Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: ProductItem(),
-          ));
+          return SizedBox(
+            width: 144,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 4),
+              // child: ProductItem(
+              //   product: ProductModel(
+              //     id: '67b4bcc98dc27a1d294a27a9',
+              //     title: 'Adidas shoe',
+              //     photos: [],
+              //     currentPrice: 10000,
+              //     quantity: 20,
+              //     rating: 4.5,
+              //   ),
+              // ),
+            ),
+          );
         },
       ),
     );

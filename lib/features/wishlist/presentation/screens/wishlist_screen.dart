@@ -3,6 +3,8 @@ import 'package:crafty_bay/features/shared/presentation/widget/product_item.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../products/data/models/product_model.dart';
+
 class WishlistScreen extends StatefulWidget {
   const WishlistScreen({super.key});
 
@@ -37,7 +39,16 @@ class _WishlistScreenState extends State<WishlistScreen> {
             mainAxisSpacing: 4,
           ),
           itemBuilder: (context, index) {
-            return ProductItem();
+            return ProductItem(
+              productModel: ProductModel(
+                id: '67b4bcc98dc27a1d294a27a9',
+                title: 'Adidas shoe',
+                photos: [],
+                currentPrice: 10000,
+                quantity: 20,
+                rating: 4.5,
+              ),
+            );
           },
         ),
       ),
