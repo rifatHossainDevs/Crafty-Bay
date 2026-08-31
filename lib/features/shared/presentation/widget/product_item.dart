@@ -38,12 +38,12 @@ class ProductItem extends StatelessWidget {
                   topRight: Radius.circular(8),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
+              child: ClipRRect(
+                borderRadius: .circular(8),
                 child: CachedNetworkImage(
-                  height: 90,
+                  height: 110,
                   imageUrl: _getPhotoPath(productModel.photos),
-                  fit: BoxFit.scaleDown,
+                  fit: BoxFit.cover,
                   errorWidget: (_, _, _) => const NoImage(),
                   progressIndicatorBuilder: (_, _, _) => const NoImage(),
                 ),

@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:crafty_bay/features/category/data/models/category_model.dart';
-import 'package:crafty_bay/features/products/presentation/screens/products_by_category_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/extension/utility_extension.dart';
+import '../../../category/data/models/category_model.dart';
+import '../../../products/presentation/screens/products_by_category_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.category});

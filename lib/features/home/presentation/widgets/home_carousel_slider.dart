@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:crafty_bay/features/shared/presentation/widget/no_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../shared/presentation/widget/no_image.dart';
 import '../providers/home_sliders_provider.dart';
 
 class HomeCarouselSlider extends StatefulWidget {

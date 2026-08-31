@@ -4,7 +4,9 @@ import '../../../../../app/app_colors.dart';
 import '../../../../../app/constants.dart';
 
 class PriceAndAddToCartSection extends StatelessWidget {
-  const PriceAndAddToCartSection({super.key});
+  const PriceAndAddToCartSection({super.key, required this.price});
+
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class PriceAndAddToCartSection extends StatelessWidget {
             children: [
               Text('Price', style: TextStyle(fontWeight: .w600)),
               Text(
-                '${Constants.takaSign}1000',
+                '${Constants.takaSign}$price',
                 style: TextStyle(
                   fontWeight: .w600,
                   fontSize: 20,

@@ -1,8 +1,8 @@
-import 'package:crafty_bay/features/category/data/models/category_model.dart';
-import 'package:crafty_bay/features/shared/presentation/widget/centered_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../category/data/models/category_model.dart';
+import '../../../shared/presentation/widget/centered_progress_indicator.dart';
 import '../../../shared/presentation/widget/product_item.dart';
 import '../providers/product_by_category_list_provider.dart';
 

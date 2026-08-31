@@ -1,9 +1,9 @@
-import 'package:crafty_bay/features/shared/presentation/widget/centered_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
 import '../../../shared/presentation/widget/category_item.dart';
+import '../../../shared/presentation/widget/centered_progress_indicator.dart';
 import '../providers/category_list_provider.dart';
 
 class CategoryScreen extends StatefulWidget {
