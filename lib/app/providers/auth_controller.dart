@@ -37,7 +37,7 @@ class AuthController {
   static Future<bool> isLoggedIn() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? token = sharedPreferences.getString(_tokenKey);
-    return token != null;
+    return token != null && token.isNotEmpty;
   }
 
   static Future<void> clearUserData() async {

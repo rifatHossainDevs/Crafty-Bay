@@ -68,14 +68,14 @@ class NetworkCaller {
         return NetworkResponse(
           isSuccess: true,
           statusCode: response.statusCode,
-          errorMessage: decodedJson,
+          body: decodedJson,
         );
       } else {
         _logResponse(response, isError: true);
         return NetworkResponse(
           isSuccess: false,
           statusCode: response.statusCode,
-          body: decodedJson['msg'],
+          errorMessage: decodedJson['msg'],
         );
       }
     } catch (e) {

@@ -33,9 +33,11 @@ class _ProductsByCategoryScreenState extends State<ProductsByCategoryScreen> {
   }
 
   void _loadMore() {
-    if (_productByCategoryListProvider.isLoading == false &&
-        _scrolledController.position.extentBefore < 300) {
-      _productByCategoryListProvider.getProductByCategoryList(widget.category.id);
+    if (_productByCategoryListProvider.isLoading) return;
+
+    if (_scrolledController.position.extentAfter < 300) {
+      _productByCategoryListProvider
+          .getProductByCategoryList(widget.category.id);
     }
   }
 

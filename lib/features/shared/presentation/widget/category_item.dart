@@ -20,6 +20,8 @@ class CategoryItem extends StatelessWidget {
           ProductsByCategoryScreen.name,
           arguments: category,
         );
+
+        debugPrint("${category.title} : ${category.id}");
       },
       child: Column(
         children: [

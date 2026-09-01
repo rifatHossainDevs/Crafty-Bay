@@ -28,11 +28,11 @@ class ProductByCategoryListProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
 
   Future<void> getProductByCategoryList(String categoryId) async {
-    _pageNo++;
-
     if (_lastPage != null && _pageNo > _lastPage!) {
       return;
     }
+
+    _pageNo++;
 
     if (_isInitialLoading) {
       _initialLoading = true;
