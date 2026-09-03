@@ -1,14 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:crafty_bay/features/cart/data/models/cart_item_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/app_colors.dart';
-import '../../../../app/assets_paths.dart';
 import '../../../../app/constants.dart';
 import '../../../shared/presentation/widget/inc_dec_button.dart';
+import '../../../shared/presentation/widget/no_image.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({
-    super.key,
-  });
+  const CartItem({super.key, required this.cartItemModel});
+
+  final CartItemModel cartItemModel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,12 @@ class CartItem extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AssetsPaths.shoePng, width: 100),
+            child: CachedNetworkImage(
+              imageUrl: cartItemModel.product.photos[0],
+              width: 100,
+              height: 100,
+              errorWidget: (_, _, __) => NoImage(),
+            ),
           ),
 
           Expanded(
@@ -37,14 +44,14 @@ class CartItem extends StatelessWidget {
                           crossAxisAlignment: .start,
                           children: [
                             Text(
-                              'Title of the Product',
+                              cartItemModel.product.title,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                                 color: Colors.black54,
                               ),
                             ),
-                            Text('Size: XL Color: Red'),
+                            Text('Size: ${cartItemModel.size} Color: ${cartItemModel.color}'),
                           ],
                         ),
                       ),
@@ -63,7 +70,7 @@ class CartItem extends StatelessWidget {
                     mainAxisAlignment: .spaceBetween,
                     children: [
                       Text(
-                        "${Constants.takaSign} 100",
+                        "${Constants.takaSign} ${cartItemModel.product.currentPrice}",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: .w600,
@@ -73,7 +80,7 @@ class CartItem extends StatelessWidget {
                       SizedBox(
                         width: 88,
                         child: IncDecButton(
-                          initialValue: 1,
+                          initialValue: cartItemModel.quantity,
                           onChange: (int value) {},
                           maxValue: 100,
                           minValue: 1,

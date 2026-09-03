@@ -12,6 +12,8 @@ import 'app_theme.dart';
 class CraftyBayApp extends StatefulWidget {
   const CraftyBayApp({super.key});
 
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>() ;
+
   @override
   State<CraftyBayApp> createState() => _CraftyBayAppState();
 }
@@ -25,6 +27,7 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
           builder: (context, localProvider, _) {
             return SafeArea(
               child: MaterialApp(
+                navigatorKey: CraftyBayApp.navigatorKey,
                 debugShowCheckedModeBanner: false,
                 title: "Crafty Bay",
                 initialRoute: SplashScreen.name,
