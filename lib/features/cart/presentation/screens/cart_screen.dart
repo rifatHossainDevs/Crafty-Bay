@@ -1,3 +1,4 @@
+import 'package:crafty_bay/features/shared/presentation/widget/centered_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,9 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-    _cartItemProvider.getCartItems();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _cartItemProvider.getCartItems();
+    });
   }
 
   @override
@@ -37,24 +40,28 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
 
-        body: Column(
-          children: [
-            Expanded(
-              child: Consumer<CartItemProvider>(
-                builder: (context, _, _) {
-                  return ListView.builder(
+        body: Consumer<CartItemProvider>(
+          builder: (context, _, _) {
+            if (_cartItemProvider.cartLoading) {
+              return CenteredProgressIndicator();
+            }
+
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
                     itemCount: _cartItemProvider.cartItem.length,
                     itemBuilder: (context, index) {
                       return CartItem(
                         cartItemModel: _cartItemProvider.cartItem[index],
                       );
                     },
-                  );
-                },
-              ),
-            ),
-            TotalPriceAndCheckoutSection(),
-          ],
+                  ),
+                ),
+                TotalPriceAndCheckoutSection(),
+              ],
+            );
+          },
         ),
       ),
     );

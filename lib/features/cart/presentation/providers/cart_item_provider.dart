@@ -17,8 +17,9 @@ class CartItemProvider extends ChangeNotifier {
 
   List<CartItemModel> get cartItem => _cartItem;
 
-  Future<void> getCartItems() async {
-    _cartLoading = true;
+  Future<bool> getCartItems() async {
+    bool isSuccess = false;
+    _cartLoading = false;
     notifyListeners();
 
     final response = await getNetworkCaller().getRequest(Urls.getCartItemsUrl);
@@ -27,11 +28,33 @@ class CartItemProvider extends ChangeNotifier {
       _cartItem = (response.body['data']['results'] as List)
           .map((cartItem) => CartItemModel.fromJson(cartItem))
           .toList();
+      isSuccess = true;
+      _errorMessage = null;
     } else {
       _errorMessage = response.errorMessage;
     }
 
     _cartLoading = false;
+    notifyListeners();
+
+    return isSuccess;
+  }
+
+  double totalPrice() {
+    double totalPrice = 0;
+    for (var item in _cartItem) {
+      totalPrice += item.product.currentPrice * item.quantity;
+    }
+    return totalPrice;
+  }
+
+  void increaseProductQuantity(int quantity, String productId) {
+    for (var item in _cartItem) {
+      if (item.id == productId) {
+        item.quantity = quantity;
+        break;
+      }
+    }
     notifyListeners();
   }
 }
