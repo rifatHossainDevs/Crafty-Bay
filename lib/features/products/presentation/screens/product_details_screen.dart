@@ -1,14 +1,18 @@
-import 'package:crafty_bay/app/providers/auth_controller.dart';
-import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screens.dart';
-import 'package:crafty_bay/features/cart/data/models/add_to_cart_params.dart';
-import 'package:crafty_bay/features/cart/presentation/providers/add_to_cart_provider.dart';
-import 'package:crafty_bay/features/shared/presentation/widget/snack_bar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../../app/providers/auth_controller.dart';
+import '../../../auth/presentation/screens/sign_in_screens.dart';
+import '../../../cart/data/models/add_to_cart_params.dart';
+import '../../../cart/presentation/providers/add_to_cart_provider.dart';
+import '../../../reviews/presentation/screens/reviews_screen.dart';
 import '../../../shared/presentation/widget/centered_progress_indicator.dart';
 import '../../../shared/presentation/widget/inc_dec_button.dart';
+import '../../../shared/presentation/widget/snack_bar_message.dart';
+import '../../../wishlist/data/models/wishlist_param.dart';
+import '../../../wishlist/presentation/providers/add_to_wishlist_provider.dart';
+import '../../../wishlist/presentation/providers/wishlist_provider.dart';
 import '../providers/product_details_provider.dart';
 import '../widgets/product_details/color_picker.dart';
 import '../widgets/product_details/price_and_add_to_cart.dart';
@@ -31,6 +35,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ProductDetailsProvider();
 
   final AddToCartProvider _addToCartProvider = AddToCartProvider();
+  final AddToWishlistProvider _addToWishlistProvider = AddToWishlistProvider();
+  final WishlistProvider _wishlistProvider = WishlistProvider();
 
   String? _selectedColor;
   String? _selectedSize;
@@ -39,23 +45,42 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   void initState() {
     _productDetailsProvider.getProductDetails(widget.productId);
+    _wishlistProvider.getWishListProducts();
     super.initState();
+  }
+
+  void _addToWishlist() async {
+    final isLoggedIn = await AuthController.isLoggedIn();
+
+    if (isLoggedIn == false) {
+      if (!mounted) return;
+      showSnackBarMessage(context, "Login first to add to wishlist");
+      Navigator.pushNamed(context, SignInScreens.name);
+      return;
+    }
+    final addToWishlistProvider = context.read<AddToWishlistProvider>();
+    final bool result = await addToWishlistProvider.addToWishList(
+      WishlistParam(productId: widget.productId),
+    );
+    if (!mounted) {
+      return;
+    }
+    if (result) {
+      _wishlistProvider.refreshWishlistProductList();
+      showSnackBarMessage(context, "Product added to wishlist");
+    } else {
+      showSnackBarMessage(context, addToWishlistProvider.errorMessage!);
+    }
   }
 
   void _addToCart() async {
     final isLoggedIn = await AuthController.isLoggedIn();
 
-    debugPrint("Is logged in: $isLoggedIn");
-    debugPrint("Access token: ${AuthController.accessToken}");
-
-    if (await AuthController.isLoggedIn() == false) {
-      debugPrint("User is NOT logged in");
+    if (isLoggedIn == false) {
       if (!mounted) return;
       Navigator.pushNamed(context, SignInScreens.name);
       return;
     }
-
-    debugPrint("User IS logged in");
 
     final bool result = await _addToCartProvider.addToCart(
       AddToCartParams(
@@ -83,6 +108,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       providers: [
         ChangeNotifierProvider.value(value: _productDetailsProvider),
         ChangeNotifierProvider.value(value: _addToCartProvider),
+        ChangeNotifierProvider.value(value: _addToWishlistProvider),
+        ChangeNotifierProvider.value(value: _wishlistProvider),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -153,7 +180,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   ),
                                   SizedBox(width: 8),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        ReviewsScreen.name,
+                                        arguments: widget.productId,
+                                      );
+                                    },
                                     child: Text("Reviews"),
                                   ),
                                   const SizedBox(width: 8),
@@ -164,10 +197,49 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     color: AppColors.themeColor,
                                     child: Padding(
                                       padding: const EdgeInsets.all(2),
-                                      child: Icon(
-                                        Icons.favorite_border,
-                                        color: Colors.white,
-                                        size: 16,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          _addToWishlist();
+                                        },
+
+                                        child:
+                                            Consumer2<
+                                              AddToWishlistProvider,
+                                              WishlistProvider
+                                            >(
+                                              builder:
+                                                  (
+                                                    context,
+                                                    addToWishlistProvider,
+                                                    wishlistProvider,
+                                                    _,
+                                                  ) {
+                                                    if (addToWishlistProvider
+                                                        .isLoading) {
+                                                      return SizedBox(
+                                                        height: 16,
+                                                        width: 16,
+                                                        child:
+                                                            CenteredProgressIndicator(),
+                                                      );
+                                                    }
+
+                                                    bool isFavorite =
+                                                        wishlistProvider
+                                                            .isProductInWishlist(
+                                                              widget.productId,
+                                                            );
+
+                                                    return Icon(
+                                                      isFavorite
+                                                          ? Icons.favorite
+                                                          : Icons
+                                                                .favorite_border,
+                                                      color: Colors.white,
+                                                      size: 16,
+                                                    );
+                                                  },
+                                            ),
                                       ),
                                     ),
                                   ),

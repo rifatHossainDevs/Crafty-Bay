@@ -1,10 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:crafty_bay/features/shared/presentation/widget/snack_bar_message.dart';
+import 'package:crafty_bay/features/wishlist/data/models/wishlist_param.dart';
+import 'package:crafty_bay/features/wishlist/presentation/providers/add_to_wishlist_provider.dart';
+import 'package:crafty_bay/features/wishlist/presentation/providers/wishlist_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/constants.dart';
+import '../../../../app/providers/auth_controller.dart';
+import '../../../auth/presentation/screens/sign_in_screens.dart';
 import '../../../products/data/models/product_model.dart';
 import '../../../products/presentation/screens/product_details_screen.dart';
+import 'centered_progress_indicator.dart';
 import 'no_image.dart';
 
 class ProductItem extends StatelessWidget {
@@ -89,18 +97,68 @@ class ProductItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        margin: EdgeInsets.zero,
-                        color: AppColors.themeColor,
-                        child: const Padding(
-                          padding: EdgeInsets.all(2.0),
-                          child: Icon(
-                            Icons.favorite_border,
-                            size: 10,
-                            color: Colors.white,
+                      GestureDetector(
+                        onTap: () async {
+                          final isLoggedIn = await AuthController.isLoggedIn();
+                          if (isLoggedIn == false) {
+                            Navigator.pushNamed(context, SignInScreens.name);
+                            return;
+                          }
+
+                          final addToWishlistProvider =
+                              context.read<AddToWishlistProvider>();
+                          final wishlistProvider =
+                              context.read<WishlistProvider>();
+
+                          final bool result =
+                              await addToWishlistProvider.addToWishList(
+                            WishlistParam(productId: productModel.id),
+                          );
+
+                          if (result) {
+                            wishlistProvider.refreshWishlistProductList();
+                            showSnackBarMessage(
+                                context, "Product added to wishlist");
+                          } else {
+                            showSnackBarMessage(
+                                context, addToWishlistProvider.errorMessage!);
+                          }
+                        },
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          margin: EdgeInsets.zero,
+                          color: AppColors.themeColor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Consumer2<AddToWishlistProvider,
+                                WishlistProvider>(
+                              builder: (context, addToWishlistProvider,
+                                  wishlistProvider, _) {
+                                if (addToWishlistProvider.isLoading) {
+                                  return const SizedBox(
+                                    height: 10,
+                                    width: 10,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 2,
+                                    ),
+                                  );
+                                }
+
+                                bool isFavorite = wishlistProvider
+                                    .isProductInWishlist(productModel.id);
+
+                                return Icon(
+                                  isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  size: 10,
+                                  color: Colors.white,
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),

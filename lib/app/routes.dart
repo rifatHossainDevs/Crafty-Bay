@@ -7,6 +7,8 @@ import '../features/auth/presentation/screens/verify_otp_screen.dart';
 import '../features/category/data/models/category_model.dart';
 import '../features/products/presentation/screens/product_details_screen.dart';
 import '../features/products/presentation/screens/products_by_category_screen.dart';
+import '../features/reviews/presentation/screens/add_new_reviews_screen.dart';
+import '../features/reviews/presentation/screens/reviews_screen.dart';
 import '../features/shared/presentation/screens/main_nav_holder_screens.dart';
 
 class AppRoutes {
@@ -31,6 +33,12 @@ class AppRoutes {
       case ProductDetailsScreen.name:
         final productID = settings.arguments as String;
         widget = ProductDetailsScreen(productId: productID);
+      case ReviewsScreen.name:
+        final productID = settings.arguments as String;
+        widget = ReviewsScreen(productId: productID,);
+      case AddNewReviewsScreen.name:
+        final productID = settings.arguments as String;
+        widget = AddNewReviewsScreen(productId: productID,);
     }
 
     return MaterialPageRoute(builder: (_) => widget);

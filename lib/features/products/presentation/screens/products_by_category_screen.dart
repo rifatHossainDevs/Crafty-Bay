@@ -58,6 +58,12 @@ class _ProductsByCategoryScreenState extends State<ProductsByCategoryScreen> {
                 return CenteredProgressIndicator();
               }
 
+              if(_productByCategoryListProvider.products.isEmpty){
+                return Center(
+                  child: Text("No Products Found", style: TextStyle(fontSize: 20, color: Colors.grey)),
+                );
+              }
+
               return Column(
                 children: [
                   Expanded(

@@ -5,7 +5,7 @@ import '../../../../app/urls.dart';
 import '../../data/models/cart_item_model.dart';
 
 class CartItemProvider extends ChangeNotifier {
-  bool _cartLoading = true;
+  bool _cartLoading = false;
 
   bool get cartLoading => _cartLoading;
 
@@ -19,7 +19,7 @@ class CartItemProvider extends ChangeNotifier {
 
   Future<bool> getCartItems() async {
     bool isSuccess = false;
-    _cartLoading = false;
+    _cartLoading = true;
     notifyListeners();
 
     final response = await getNetworkCaller().getRequest(Urls.getCartItemsUrl);

@@ -11,12 +11,15 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: SvgPicture.asset(AssetsPaths.navLogoSvg),
       actions: [
-        _buildIconButton(icon: Icons.person_outline, onTap: () {}),
-        const SizedBox(width: 8,),
+        _buildIconButton(
+          icon: Icons.notifications_active_outlined,
+          onTap: () {},
+        ),
+        const SizedBox(width: 8),
         _buildIconButton(icon: Icons.add_ic_call_outlined, onTap: () {}),
-        const SizedBox(width: 8,),
-        _buildIconButton(icon: Icons.notifications_active_outlined, onTap: () {}),
-        const SizedBox(width: 16,)
+        const SizedBox(width: 8),
+        _buildIconButton(icon: Icons.person_outline, onTap: () {}),
+        const SizedBox(width: 16),
       ],
     );
   }
@@ -30,11 +33,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: CircleAvatar(
         radius: 16,
         backgroundColor: Colors.grey.withAlpha(40),
-        child: Icon(icon, color: Colors.grey, size: 20,),
+        child: Icon(icon, color: Colors.grey, size: 20),
       ),
     );
   }
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
+
+
 }

@@ -11,8 +11,10 @@ class Urls {
       '$_baseUrl/categories?page=$pageNo&count=$pageSize';
 
   static String getProductListByCategoryUrl(
-      String categoryId, int pageNo, int pageSize) =>
-      '$_baseUrl/products?category=$categoryId&page=$pageNo&count=$pageSize';
+    String categoryId,
+    int pageNo,
+    int pageSize,
+  ) => '$_baseUrl/products?category=$categoryId&page=$pageNo&count=$pageSize';
 
   static String getProductDetailsUrl(String productId) =>
       '$_baseUrl/products/id/$productId';
@@ -21,4 +23,13 @@ class Urls {
 
   static const String getCartItemsUrl = '$_baseUrl/cart';
 
+  static String getWishListProductsUrl(int pageNo, int pageSize) =>
+      '$_baseUrl/wishlist?page=$pageNo&count=$pageSize';
+
+  static const String addToWishlistUrl = '$_baseUrl/wishlist';
+
+  static const String createReviewUrl = '$_baseUrl/review';
+
+  static String getReviewListUrl(String productId, int pageNo, int pageSize) =>
+      '$_baseUrl/reviews?product=$productId&page=$pageNo&count=$pageSize';
 }

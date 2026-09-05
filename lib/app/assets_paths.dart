@@ -8,4 +8,5 @@ class AssetsPaths {
   static const String noImageSvg = '$_imagePath/ic_no_image.svg';
   static const String shoePng = '$_imagePath/shoe.png';
   static const String noImagePng = '$_imagePath/no_image.png';
+  static const String profilePng = '$_imagePath/profile.png';
 }

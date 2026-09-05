@@ -12,6 +12,8 @@ import '../../../category/presentation/screens/category_screen.dart';
 import '../../../home/presentation/providers/home_sliders_provider.dart';
 import '../../../home/presentation/screens/home_screen.dart';
 import '../../../products/presentation/providers/home_product_provider.dart';
+import '../../../wishlist/presentation/providers/add_to_wishlist_provider.dart';
+import '../../../wishlist/presentation/providers/wishlist_provider.dart';
 import '../../../wishlist/presentation/screens/wishlist_screen.dart';
 import '../providers/main_nav_holder_provider.dart';
 
@@ -37,6 +39,8 @@ class _MainNavHolderScreensState extends State<MainNavHolderScreens> {
   final HomeSlidersProvider _homeSlidersProvider = HomeSlidersProvider();
   final CategoryListProvider _categoryListProvider = CategoryListProvider();
   final HomeProductProvider _homeProductProvider = HomeProductProvider();
+  final WishlistProvider _wishlistProvider = WishlistProvider();
+  final AddToWishlistProvider _addToWishlistProvider = AddToWishlistProvider();
 
   @override
   void initState() {
@@ -44,6 +48,7 @@ class _MainNavHolderScreensState extends State<MainNavHolderScreens> {
     _homeSlidersProvider.getHomeSliders();
     _categoryListProvider.getCategoryList();
     _homeProductProvider.getHomeProducts();
+    _wishlistProvider.getWishListProducts();
   }
 
   @override
@@ -53,6 +58,8 @@ class _MainNavHolderScreensState extends State<MainNavHolderScreens> {
         ChangeNotifierProvider.value(value: _homeSlidersProvider),
         ChangeNotifierProvider.value(value: _categoryListProvider),
         ChangeNotifierProvider.value(value: _homeProductProvider),
+        ChangeNotifierProvider.value(value: _wishlistProvider),
+        ChangeNotifierProvider.value(value: _addToWishlistProvider),
       ],
       child: Consumer<MainNavHolderProvider>(
         builder: (context, mainNavHolderProvider, _) {
