@@ -9,4 +9,5 @@ class AssetsPaths {
   static const String shoePng = '$_imagePath/shoe.png';
   static const String noImagePng = '$_imagePath/no_image.png';
   static const String profilePng = '$_imagePath/profile.png';
+  static const String whatsappSvg = '$_imagePath/whatsapp.svg';
 }

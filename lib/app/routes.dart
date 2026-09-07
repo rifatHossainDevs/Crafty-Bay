@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../features/auth/presentation/screens/edit_profile_screen.dart';
 import '../features/auth/presentation/screens/sign_in_screens.dart';
 import '../features/auth/presentation/screens/sign_up_screens.dart';
 import '../features/auth/presentation/screens/splash_screen.dart';
 import '../features/auth/presentation/screens/verify_otp_screen.dart';
+import '../features/brands/presentation/screens/brands_screen.dart';
 import '../features/category/data/models/category_model.dart';
 import '../features/products/presentation/screens/product_details_screen.dart';
 import '../features/products/presentation/screens/products_by_category_screen.dart';
 import '../features/reviews/presentation/screens/add_new_reviews_screen.dart';
 import '../features/reviews/presentation/screens/reviews_screen.dart';
+import '../features/shared/presentation/screens/about_screen.dart';
 import '../features/shared/presentation/screens/main_nav_holder_screens.dart';
 
 class AppRoutes {
@@ -39,6 +42,12 @@ class AppRoutes {
       case AddNewReviewsScreen.name:
         final productID = settings.arguments as String;
         widget = AddNewReviewsScreen(productId: productID,);
+      case EditProfileScreen.name:
+        widget = EditProfileScreen();
+      case BrandsScreen.name:
+        widget = BrandsScreen();
+      case AboutScreen.name:
+        widget = AboutScreen();
     }
 
     return MaterialPageRoute(builder: (_) => widget);

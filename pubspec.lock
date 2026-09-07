@@ -405,6 +405,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  mirror_skeleton:
+    dependency: "direct main"
+    description:
+      name: mirror_skeleton
+      sha256: "1312dce2520f19e60405b41054745b592f6eada2f0624b7e2bb0e6ed6086c094"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
   nested:
     dependency: transitive
     description:
