@@ -32,4 +32,8 @@ class Urls {
 
   static String getReviewListUrl(String productId, int pageNo, int pageSize) =>
       '$_baseUrl/reviews?product=$productId&page=$pageNo&count=$pageSize';
+
+  static const String getUpdateUserUrl = '$_baseUrl/auth/profile';
+
+  static const String getBrandsUrl = '$_baseUrl/brands';
 }
