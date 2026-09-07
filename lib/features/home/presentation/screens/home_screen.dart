@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/extension/utility_extension.dart';
 import '../../../products/presentation/providers/home_product_provider.dart';
 import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
 import '../../../shared/presentation/widget/centered_progress_indicator.dart';
@@ -10,6 +11,7 @@ import '../widgets/home_category_section.dart';
 import '../widgets/home_product_section.dart';
 import '../widgets/home_search_bar.dart';
 import '../widgets/home_section_header.dart';
+import '../widgets/navigation_drawer_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,13 +21,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    final localization = context.localization;
     final homeProductProvider = context.watch<HomeProductProvider>();
     return ChangeNotifierProvider.value(
       value: homeProductProvider,
       child: Scaffold(
-        appBar: HomeAppBar(),
+        key: _scaffoldKey,
+        appBar: HomeAppBar(
+          onProfileTap: () {
+            _scaffoldKey.currentState?.openEndDrawer();
+          },
+        ),
+        endDrawer: Drawer(
+          child: NavigationDrawerView(localization: localization),
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),

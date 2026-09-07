@@ -77,7 +77,7 @@ class LocalChangerDropdown extends StatelessWidget {
     return Consumer<LocaleProvider>(
       builder: (context, localProvider, _) {
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
           decoration: BoxDecoration(
             color: AppColors.themeColor,
             borderRadius: .circular(8),
@@ -134,7 +134,7 @@ class ThemeChangerDropdown extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, _) {
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
           decoration: BoxDecoration(
             color: AppColors.themeColor,
             borderRadius: .circular(8),

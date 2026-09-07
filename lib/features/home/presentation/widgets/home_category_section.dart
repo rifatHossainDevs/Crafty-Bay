@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mirror_skeleton/mirror_skeleton.dart';
 import 'package:provider/provider.dart';
 
 import '../../../category/presentation/providers/category_list_provider.dart';
@@ -17,19 +18,22 @@ class HomeCategorySection extends StatelessWidget {
           if (categoryListProvider.initialLoading) {
             return CenteredProgressIndicator();
           }
-          return ListView.separated(
-            scrollDirection: .horizontal,
-            itemCount: _getCategoryLength(
-              categoryListProvider.categories.length,
+          return MirrorSkeleton(
+            isLoading: categoryListProvider.initialLoading,
+            child: ListView.separated(
+              scrollDirection: .horizontal,
+              itemCount: _getCategoryLength(
+                categoryListProvider.categories.length,
+              ),
+              itemBuilder: (context, index) {
+                return CategoryItem(
+                  category: categoryListProvider.categories[index],
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(width: 12);
+              },
             ),
-            itemBuilder: (context, index) {
-              return CategoryItem(
-                category: categoryListProvider.categories[index],
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(width: 12);
-            },
           );
         },
       ),

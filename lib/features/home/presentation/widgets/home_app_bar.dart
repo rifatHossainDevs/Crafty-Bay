@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../app/assets_paths.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key});
+  const HomeAppBar({super.key, required this.onProfileTap});
+  final VoidCallback onProfileTap;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         const SizedBox(width: 8),
         _buildIconButton(icon: Icons.add_ic_call_outlined, onTap: () {}),
         const SizedBox(width: 8),
-        _buildIconButton(icon: Icons.person_outline, onTap: () {}),
+        _buildIconButton(icon: Icons.person_outline, onTap: onProfileTap),
         const SizedBox(width: 16),
       ],
     );

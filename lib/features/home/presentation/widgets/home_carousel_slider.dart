@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:crafty_bay/features/shared/presentation/widget/centered_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
         if (homeSlidersProvider.getHomeSlidersInProgress) {
           return SizedBox(
             height: 200,
-            child: Center(child: CircularProgressIndicator()),
+            child: CenteredProgressIndicator(),
           );
         }
 
