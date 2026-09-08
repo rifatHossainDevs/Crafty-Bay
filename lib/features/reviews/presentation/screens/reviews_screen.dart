@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/extension/utility_extension.dart';
 import '../../../shared/presentation/widget/centered_progress_indicator.dart';
 import '../providers/reviews_list_provider.dart';
 import '../widgets/product_reviews_count_cart.dart';
@@ -42,7 +43,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
       value: _reviewsListProvider,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Reviews"),
+          title: Text(context.localization.reviews),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);

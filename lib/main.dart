@@ -3,6 +3,8 @@ import 'package:crafty_bay/app/providers/theme_provider.dart';
 import 'package:crafty_bay/features/shared/presentation/providers/main_nav_holder_provider.dart';
 import 'package:crafty_bay/features/auth/presentation/providers/sign_up_provider.dart';
 import 'package:crafty_bay/features/auth/presentation/providers/verify_otp_provider.dart';
+import 'package:crafty_bay/features/wishlist/presentation/providers/add_to_wishlist_provider.dart';
+import 'package:crafty_bay/features/wishlist/presentation/providers/wishlist_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -47,6 +49,8 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => MainNavHolderProvider()),
         ChangeNotifierProvider(create: (_) => SignUpProvider()),
         ChangeNotifierProvider(create: (_) => VerifyOtpProvider()),
+        ChangeNotifierProvider(create: (_) => WishlistProvider()),
+        ChangeNotifierProvider(create: (_) => AddToWishlistProvider()),
       ],
       child: const CraftyBayApp(),
     ),

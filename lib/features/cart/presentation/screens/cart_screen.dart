@@ -2,6 +2,7 @@ import 'package:crafty_bay/features/shared/presentation/widget/centered_progress
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/extension/utility_extension.dart';
 import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
 import '../providers/cart_item_provider.dart';
 import '../widget/cart_item.dart';
@@ -31,7 +32,7 @@ class _CartScreenState extends State<CartScreen> {
       value: _cartItemProvider,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Cart"),
+          title: Text(context.localization.cart),
           leading: IconButton(
             onPressed: () {
               context.read<MainNavHolderProvider>().backToHome();

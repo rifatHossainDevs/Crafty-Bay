@@ -1,4 +1,3 @@
-import 'package:crafty_bay/features/category/presentation/providers/category_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,11 +7,11 @@ import '../../../../app/extension/utility_extension.dart';
 import '../../../../app/providers/auth_controller.dart';
 import '../../../auth/presentation/screens/sign_in_screens.dart';
 import '../../../cart/presentation/screens/cart_screen.dart';
+import '../../../category/presentation/providers/category_list_provider.dart';
 import '../../../category/presentation/screens/category_screen.dart';
 import '../../../home/presentation/providers/home_sliders_provider.dart';
 import '../../../home/presentation/screens/home_screen.dart';
 import '../../../products/presentation/providers/home_product_provider.dart';
-import '../../../wishlist/presentation/providers/add_to_wishlist_provider.dart';
 import '../../../wishlist/presentation/providers/wishlist_provider.dart';
 import '../../../wishlist/presentation/screens/wishlist_screen.dart';
 import '../providers/main_nav_holder_provider.dart';
@@ -39,8 +38,6 @@ class _MainNavHolderScreensState extends State<MainNavHolderScreens> {
   final HomeSlidersProvider _homeSlidersProvider = HomeSlidersProvider();
   final CategoryListProvider _categoryListProvider = CategoryListProvider();
   final HomeProductProvider _homeProductProvider = HomeProductProvider();
-  final WishlistProvider _wishlistProvider = WishlistProvider();
-  final AddToWishlistProvider _addToWishlistProvider = AddToWishlistProvider();
 
   @override
   void initState() {
@@ -48,7 +45,11 @@ class _MainNavHolderScreensState extends State<MainNavHolderScreens> {
     _homeSlidersProvider.getHomeSliders();
     _categoryListProvider.getCategoryList();
     _homeProductProvider.getHomeProducts();
-    _wishlistProvider.getWishListProducts();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (AuthController.accessToken != null) {
+        context.read<WishlistProvider>().getWishListProducts();
+      }
+    });
   }
 
   @override
@@ -58,8 +59,6 @@ class _MainNavHolderScreensState extends State<MainNavHolderScreens> {
         ChangeNotifierProvider.value(value: _homeSlidersProvider),
         ChangeNotifierProvider.value(value: _categoryListProvider),
         ChangeNotifierProvider.value(value: _homeProductProvider),
-        ChangeNotifierProvider.value(value: _wishlistProvider),
-        ChangeNotifierProvider.value(value: _addToWishlistProvider),
       ],
       child: Consumer<MainNavHolderProvider>(
         builder: (context, mainNavHolderProvider, _) {
@@ -81,7 +80,7 @@ class _MainNavHolderScreensState extends State<MainNavHolderScreens> {
                   now.difference(lastPressed!) > const Duration(seconds: 2)) {
                 lastPressed = now;
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Press back again to exit")),
+                  SnackBar(content: Text(context.localization.pressBackAgainToExit)),
                 );
               } else {
                 SystemNavigator.pop();

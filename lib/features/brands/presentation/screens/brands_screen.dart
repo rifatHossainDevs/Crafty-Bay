@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:crafty_bay/features/shared/presentation/widget/centered_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/app_colors.dart';
+import '../../../../app/extension/utility_extension.dart';
+import '../../../shared/presentation/widget/centered_progress_indicator.dart';
 import '../../../shared/presentation/widget/no_image.dart';
 import '../providers/brand_provider.dart';
 
@@ -26,11 +28,12 @@ class _BrandsScreenState extends State<BrandsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return ChangeNotifierProvider.value(
       value: _brandProvider,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Brands"),
+          title: Text(context.localization.brands),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -46,7 +49,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
               Expanded(
                 child: Consumer<BrandProvider>(
                   builder: (context, _, _) {
-                    if(_brandProvider.isLoading){
+                    if (_brandProvider.isLoading) {
                       return CenteredProgressIndicator();
                     }
                     return ListView.separated(
@@ -54,6 +57,7 @@ class _BrandsScreenState extends State<BrandsScreen> {
                         return Card(
                           color: Colors.white,
                           elevation: 3,
+                          shadowColor: AppColors.themeColor,
                           child: ListTile(
                             leading: CachedNetworkImage(
                               imageUrl: _brandProvider.brands[index].icon,
@@ -61,9 +65,9 @@ class _BrandsScreenState extends State<BrandsScreen> {
                                 return NoImage();
                               },
                             ),
-                            title: Text(_brandProvider.brands[index].title),
+                            title: Text(_brandProvider.brands[index].title, style: TextStyle(color: Colors.black),),
                             subtitle: Text(
-                              _brandProvider.brands[index].description,
+                              _brandProvider.brands[index].description,style: TextStyle(color: Colors.black)
                             ),
                           ),
                         );

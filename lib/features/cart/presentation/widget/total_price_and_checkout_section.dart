@@ -1,10 +1,10 @@
-import 'package:crafty_bay/features/cart/data/models/cart_item_model.dart';
 import 'package:crafty_bay/features/cart/presentation/providers/cart_item_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../app/app_colors.dart';
 import '../../../../../app/constants.dart';
+import '../../../../../app/extension/utility_extension.dart';
 
 class TotalPriceAndCheckoutSection extends StatefulWidget {
   const TotalPriceAndCheckoutSection({super.key});
@@ -30,7 +30,7 @@ class _TotalPriceAndCheckoutSectionState
           Column(
             crossAxisAlignment: .start,
             children: [
-              Text('Total Price', style: TextStyle(fontWeight: .w600)),
+              Text(context.localization.totalPrice, style: TextStyle(fontWeight: .w600)),
               Text(
                 '${Constants.takaSign}${context.read<CartItemProvider>().totalPrice()}',
                 style: TextStyle(
@@ -43,7 +43,7 @@ class _TotalPriceAndCheckoutSectionState
           ),
           SizedBox(
             width: 120,
-            child: FilledButton(onPressed: () {}, child: Text("Checkout")),
+            child: FilledButton(onPressed: () {}, child: Text(context.localization.checkout)),
           ),
         ],
       ),

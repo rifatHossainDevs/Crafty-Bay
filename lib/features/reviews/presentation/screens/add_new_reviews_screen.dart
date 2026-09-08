@@ -3,6 +3,7 @@ import 'package:crafty_bay/features/shared/presentation/widget/snack_bar_message
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/extension/utility_extension.dart';
 import '../providers/add_review_provider.dart';
 
 class AddNewReviewsScreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class _AddNewReviewsScreenState extends State<AddNewReviewsScreen> {
     );
 
     if(result){
-      showSnackBarMessage(context, "Review added successfully");
+      showSnackBarMessage(context, context.localization.reviewAddedSuccessfully);
       Navigator.pop(context);
     }else{
       showSnackBarMessage(context, _addReviewProvider.errorMessage!);
@@ -46,7 +47,7 @@ class _AddNewReviewsScreenState extends State<AddNewReviewsScreen> {
       value: _addReviewProvider,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Create Reviews"),
+          title: Text(context.localization.createReview),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -62,13 +63,10 @@ class _AddNewReviewsScreenState extends State<AddNewReviewsScreen> {
               children: [
                 TextFormField(
                   controller: _firstNameTEController,
-                  keyboardType: .emailAddress,
-                  textInputAction: .next,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    hint: Text(
-                      "First Name",
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    hintText: context.localization.firstName,
                     suffixIcon: IconButton(
                       onPressed: () => _clearData(_firstNameTEController),
                       icon: Icon(Icons.cancel, color: Colors.grey),
@@ -76,7 +74,7 @@ class _AddNewReviewsScreenState extends State<AddNewReviewsScreen> {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Please enter your first name";
+                      return context.localization.pleaseEnterFirstName;
                     }
                     return null;
                   },
@@ -84,10 +82,10 @@ class _AddNewReviewsScreenState extends State<AddNewReviewsScreen> {
                 SizedBox(height: 16),
                 TextFormField(
                   controller: _lastNameTEController,
-                  keyboardType: .emailAddress,
-                  textInputAction: .next,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    hint: Text("Last Name", style: TextStyle(color: Colors.grey)),
+                    hintText: context.localization.lastName,
                     suffixIcon: IconButton(
                       onPressed: () => _clearData(_lastNameTEController),
                       icon: Icon(Icons.cancel, color: Colors.grey),
@@ -95,7 +93,7 @@ class _AddNewReviewsScreenState extends State<AddNewReviewsScreen> {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Please enter your last name";
+                      return context.localization.pleaseEnterLastName;
                     }
                     return null;
                   },
@@ -103,15 +101,12 @@ class _AddNewReviewsScreenState extends State<AddNewReviewsScreen> {
                 SizedBox(height: 16),
                 TextFormField(
                   controller: _reviewTEController,
-                  keyboardType: .emailAddress,
-                  textInputAction: .next,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
                   minLines: 10,
                   maxLines: 16,
                   decoration: InputDecoration(
-                    hint: Text(
-                      "Write Review",
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    hintText: context.localization.writeReview,
                     suffixIcon: IconButton(
                       onPressed: () => _clearData(_reviewTEController),
                       icon: Icon(Icons.cancel, color: Colors.grey),
@@ -119,7 +114,7 @@ class _AddNewReviewsScreenState extends State<AddNewReviewsScreen> {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Please enter your review";
+                      return context.localization.pleaseEnterReview;
                     }
                     return null;
                   },
@@ -131,7 +126,7 @@ class _AddNewReviewsScreenState extends State<AddNewReviewsScreen> {
                   if(_formKey.currentState!.validate()){
                     _addReview();
                   }
-                }, child: Text("Submit")),
+                }, child: Text(context.localization.submit)),
               ],
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app/extension/utility_extension.dart';
 import '../../../../../app/app_colors.dart';
 import '../../../../app/providers/auth_controller.dart';
 import '../../../auth/presentation/screens/sign_in_screens.dart';
@@ -26,7 +27,7 @@ class ProductReviewsCountCart extends StatelessWidget {
             crossAxisAlignment: .start,
             children: [
               Text(
-                'Reviews ($reviewsCount)',
+                context.localization.reviewsWithCount(reviewsCount),
                 style: TextStyle(fontSize: 20, color: Colors.black54),
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:crafty_bay/features/shared/presentation/widget/centered_progress
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/extension/utility_extension.dart';
 import '../../../shared/presentation/widget/snack_bar_message.dart';
 import '../../data/models/update_user_params.dart';
 import '../providers/update_user_provider.dart';
@@ -38,7 +39,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     if(!mounted) return;
 
     if(result){
-      showSnackBarMessage(context, "Profile Updated Successfully");
+      showSnackBarMessage(context, context.localization.profileUpdatedSuccessfully);
       Navigator.pop(context);
     }else{
       showSnackBarMessage(context, _updateUserProvider.errorMessage!);
@@ -51,7 +52,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       value: _updateUserProvider,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Edit Profile"),
+          title: Text(context.localization.editProfile),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -81,7 +82,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     controller: _firstNameTEController,
                     textInputAction: .next,
                     decoration: InputDecoration(
-                      hint: Text("First Name"),
+                      hint: Text(context.localization.firstName),
                       suffixIcon: IconButton(
                         onPressed: () => _clearData(_firstNameTEController),
                         icon: Icon(Icons.cancel),
@@ -89,7 +90,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Enter your first name';
+                        return context.localization.enterYourFirstName;
                       }
                       return null;
                     }
@@ -99,7 +100,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     controller: _lastNameTEController,
                     textInputAction: .next,
                     decoration: InputDecoration(
-                      hint: Text("Last Name"),
+                      hint: Text(context.localization.lastName),
                       suffixIcon: IconButton(
                         onPressed: () => _clearData(_lastNameTEController),
                         icon: Icon(Icons.cancel),
@@ -107,7 +108,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Enter your last name';
+                        return context.localization.enterYourLastName;
                       }
                       return null;
                     }
@@ -118,7 +119,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     textInputAction: .next,
                     keyboardType: .phone,
                     decoration: InputDecoration(
-                      hint: Text("Mobile"),
+                      hint: Text(context.localization.mobile),
                       suffixIcon: IconButton(
                         onPressed: () => _clearData(_mobileTEController),
                         icon: Icon(Icons.cancel),
@@ -126,9 +127,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Enter your mobile number';
+                        return context.localization.enterYourPhoneNumber;
                       }else if(value.length != 11){
-                        return 'Enter a valid mobile number';
+                        return context.localization.enterYourPhoneNumber;
                       }
                       return null;
                     }
@@ -138,7 +139,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     controller: _cityTEController,
                     textInputAction: .next,
                     decoration: InputDecoration(
-                      hint: Text("City"),
+                      hint: Text(context.localization.city),
                       suffixIcon: IconButton(
                         onPressed: () => _clearData(_cityTEController),
                         icon: Icon(Icons.cancel),
@@ -146,7 +147,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Enter your city';
+                        return context.localization.enterYourCity;
                       }
                       return null;
                     }
@@ -158,7 +159,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     builder: (context, _, _) {
                       return FilledButton(
                         onPressed: _changeProfile,
-                        child: _updateUserProvider.isUpdateInProgress? CenteredProgressIndicator() : Text("Update Profile"),
+                        child: _updateUserProvider.isUpdateInProgress? CenteredProgressIndicator() : Text(context.localization.update),
                       );
                     }
                   )

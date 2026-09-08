@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../app/app_colors.dart';
 import '../../../../../app/constants.dart';
+import '../../../../../app/extension/utility_extension.dart';
 import '../../../../cart/presentation/providers/add_to_cart_provider.dart';
 
 class PriceAndAddToCartSection extends StatelessWidget {
@@ -30,7 +31,7 @@ class PriceAndAddToCartSection extends StatelessWidget {
           Column(
             crossAxisAlignment: .start,
             children: [
-              Text('Price', style: TextStyle(fontWeight: .w600)),
+              Text(context.localization.price, style: TextStyle(fontWeight: .w600)),
               Text(
                 '${Constants.takaSign}$price',
                 style: TextStyle(
@@ -50,7 +51,7 @@ class PriceAndAddToCartSection extends StatelessWidget {
                 }
                 return FilledButton(
                   onPressed: onAddCart,
-                  child: Text("Add to Cart"),
+                  child: Text(context.localization.addToCart),
                 );
               },
             ),

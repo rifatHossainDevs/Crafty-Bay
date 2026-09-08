@@ -62,9 +62,9 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                     const SizedBox(height: 62),
                     const AppLogo(width: 100, height: 100),
                     const SizedBox(height: 16),
-                    Text("Verify OTP", style: textTheme.titleLarge),
+                    Text(context.localization.verifyOtp, style: textTheme.titleLarge),
                     Text(
-                      "A 4 Digit OTP Code has been Sent",
+                      context.localization.otpCodeSent,
                       style: textTheme.labelLarge,
                     ),
                     const SizedBox(height: 24),

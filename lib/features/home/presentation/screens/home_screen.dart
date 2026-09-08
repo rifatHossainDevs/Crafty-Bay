@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/extension/utility_extension.dart';
+import '../../../category/data/models/category_model.dart';
 import '../../../products/presentation/providers/home_product_provider.dart';
+import '../../../products/presentation/screens/products_by_category_screen.dart';
 import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
 import '../../../shared/presentation/widget/centered_progress_indicator.dart';
 import '../widgets/home_app_bar.dart';
@@ -50,14 +52,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 HomeCarouselSlider(),
                 const SizedBox(height: 12),
                 HomeSectionHeader(
-                  title: "Category",
+                  title: localization.category,
                   onTapSeeAll: () {
                     context.read<MainNavHolderProvider>().moveToCategory();
                   },
                 ),
                 HomeCategorySection(),
                 const SizedBox(height: 8),
-                HomeSectionHeader(title: "Popular", onTapSeeAll: () {}),
+                HomeSectionHeader(
+                  title: localization.popular,
+                  onTapSeeAll: () {
+                    Navigator.pushNamed(
+                      context,
+                      ProductsByCategoryScreen.name,
+                      arguments: CategoryModel(
+                        id: '67c35af85e8a445235de197b',
+                        title: localization.popular,
+                        icon: '',
+                      ),
+                    );
+                  },
+                ),
                 Consumer<HomeProductProvider>(
                   builder: (context, _, _) {
                     if (homeProductProvider.loading) {
@@ -69,7 +84,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 const SizedBox(height: 8),
-                HomeSectionHeader(title: "Special", onTapSeeAll: () {}),
+                HomeSectionHeader(
+                  title: localization.special,
+                  onTapSeeAll: () {
+                    Navigator.pushNamed(
+                      context,
+                      ProductsByCategoryScreen.name,
+                      arguments: CategoryModel(
+                        id: '67c35b395e8a445235de197e',
+                        title: localization.special,
+                        icon: '',
+                      ),
+                    );
+                  },
+                ),
                 Consumer<HomeProductProvider>(
                   builder: (context, _, _) {
                     if (homeProductProvider.loading) {
@@ -81,7 +109,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 const SizedBox(height: 8),
-                HomeSectionHeader(title: "New", onTapSeeAll: () {}),
+                HomeSectionHeader(
+                  title: localization.newArrival,
+                  onTapSeeAll: () {
+                    Navigator.pushNamed(
+                      context,
+                      ProductsByCategoryScreen.name,
+                      arguments: CategoryModel(
+                        id: '67c7bec4623a876bc4766fea',
+                        title: localization.newArrival,
+                        icon: '',
+                      ),
+                    );
+                  },
+                ),
                 Consumer<HomeProductProvider>(
                   builder: (context, _, _) {
                     if (homeProductProvider.loading) {

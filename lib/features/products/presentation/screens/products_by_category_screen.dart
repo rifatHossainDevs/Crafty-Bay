@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/extension/utility_extension.dart';
 import '../../../category/data/models/category_model.dart';
 import '../../../shared/presentation/widget/centered_progress_indicator.dart';
 import '../../../shared/presentation/widget/product_item.dart';
@@ -60,7 +61,7 @@ class _ProductsByCategoryScreenState extends State<ProductsByCategoryScreen> {
 
               if(_productByCategoryListProvider.products.isEmpty){
                 return Center(
-                  child: Text("No Products Found", style: TextStyle(fontSize: 20, color: Colors.grey)),
+                  child: Text(context.localization.noProductsFound, style: TextStyle(fontSize: 20, color: Colors.grey)),
                 );
               }
 
@@ -74,15 +75,16 @@ class _ProductsByCategoryScreenState extends State<ProductsByCategoryScreen> {
                       child: GridView.builder(
                         controller: _scrolledController,
                         itemCount: _productByCategoryListProvider.products.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
-                          childAspectRatio: .7,
+                          childAspectRatio: 0.7,
                           mainAxisSpacing: 4,
                           crossAxisSpacing: 4,
                         ),
                         itemBuilder: (context, index) {
                           return ProductItem(
-                            productModel: _productByCategoryListProvider.products[index],
+                            productModel:
+                                _productByCategoryListProvider.products[index],
                           );
                         },
                       ),

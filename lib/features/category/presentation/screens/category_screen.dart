@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../app/extension/utility_extension.dart';
 import '../../../shared/presentation/providers/main_nav_holder_provider.dart';
 import '../../../shared/presentation/widget/category_item.dart';
 import '../../../shared/presentation/widget/centered_progress_indicator.dart';
@@ -37,7 +38,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Categories"),
+        title: Text(context.localization.categories),
         leading: IconButton(
           onPressed: () {
             context.read<MainNavHolderProvider>().backToHome();

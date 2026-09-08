@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app/extension/utility_extension.dart';
+
 class HomeSearchBar extends StatelessWidget {
   const HomeSearchBar({super.key});
 
@@ -10,7 +12,7 @@ class HomeSearchBar extends StatelessWidget {
       keyboardType: .text,
       onChanged: (String? value) {},
       decoration: InputDecoration(
-        hintText: "Search...",
+        hintText: context.localization.searchHint,
         prefixIcon: Icon(Icons.search),
         fillColor: Colors.grey.withAlpha(50),
         filled: true,

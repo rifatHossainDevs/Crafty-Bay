@@ -52,9 +52,9 @@ class _SignUpScreensState extends State<SignUpScreens> {
                     const SizedBox(height: 16),
                     const AppLogo(width: 100, height: 100),
                     const SizedBox(height: 16),
-                    Text("Sign Up", style: textTheme.titleLarge),
+                    Text(context.localization.signUp, style: textTheme.titleLarge),
                     Text(
-                      "Get stated with us with your details",
+                      context.localization.getStartedWithDetails,
                       style: textTheme.labelLarge,
                     ),
                     const SizedBox(height: 24),
@@ -63,7 +63,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       keyboardType: .emailAddress,
                       textInputAction: .next,
                       decoration: InputDecoration(
-                        hint: Text("Email"),
+                        hint: Text(context.localization.email),
                         suffixIcon: IconButton(
                           onPressed: () => _clearData(_emailTEController),
                           icon: Icon(Icons.cancel),
@@ -76,7 +76,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       controller: _firstNameTEController,
                       textInputAction: .next,
                       decoration: InputDecoration(
-                        hint: Text("First Name"),
+                        hint: Text(context.localization.firstName),
                         suffixIcon: IconButton(
                           onPressed: () => _clearData(_firstNameTEController),
                           icon: Icon(Icons.cancel),
@@ -84,7 +84,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       ),
                       validator: (input) => Validators.validateText(
                         input,
-                        message: 'Enter your first name',
+                        message: context.localization.enterYourFirstName,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -92,7 +92,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       controller: _lastNameTEController,
                       textInputAction: .next,
                       decoration: InputDecoration(
-                        hint: Text("Last Name"),
+                        hint: Text(context.localization.lastName),
                         suffixIcon: IconButton(
                           onPressed: () => _clearData(_lastNameTEController),
                           icon: Icon(Icons.cancel),
@@ -100,7 +100,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       ),
                       validator: (input) => Validators.validateText(
                         input,
-                        message: 'Enter your last name',
+                        message: context.localization.enterYourLastName,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -109,7 +109,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       textInputAction: .next,
                       keyboardType: .phone,
                       decoration: InputDecoration(
-                        hint: Text("Mobile"),
+                        hint: Text(context.localization.mobile),
                         suffixIcon: IconButton(
                           onPressed: () => _clearData(_mobileTEController),
                           icon: Icon(Icons.cancel),
@@ -122,7 +122,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       controller: _cityTEController,
                       textInputAction: .next,
                       decoration: InputDecoration(
-                        hint: Text("City"),
+                        hint: Text(context.localization.city),
                         suffixIcon: IconButton(
                           onPressed: () => _clearData(_cityTEController),
                           icon: Icon(Icons.cancel),
@@ -130,7 +130,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       ),
                       validator: (input) => Validators.validateText(
                         input,
-                        message: 'Enter your city name',
+                        message: context.localization.enterYourCity,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -139,7 +139,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                       obscuringCharacter: '*',
                       controller: _passwordTEController,
                       decoration: InputDecoration(
-                        hint: Text("Password"),
+                        hint: Text(context.localization.password),
                         suffixIcon: IconButton(
                           onPressed: _changePasswordVisibility,
                           icon: isObscurePassword
@@ -159,7 +159,7 @@ class _SignUpScreensState extends State<SignUpScreens> {
                         }
                         return FilledButton(
                           onPressed: _onTapSignUpButton,
-                          child: Text("Sign Up"),
+                          child: Text(context.localization.signUp),
                         );
                       },
                     ),

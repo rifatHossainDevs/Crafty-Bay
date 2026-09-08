@@ -7,12 +7,10 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.white,
     colorSchemeSeed: AppColors.themeColor,
     textTheme: _textTheme,
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.white,
-    ),
+    appBarTheme: AppBarTheme(backgroundColor: Colors.white),
     inputDecorationTheme: _inputDecorationTheme,
     progressIndicatorTheme: _progressIndicatorThemeData,
-    filledButtonTheme: _filledButtonThemeData
+    filledButtonTheme: _filledButtonThemeData,
   );
 
   static ThemeData get darkTheme => ThemeData(
@@ -20,7 +18,7 @@ class AppTheme {
     colorSchemeSeed: AppColors.themeColor,
     textTheme: _textTheme,
     inputDecorationTheme: _inputDecorationTheme,
-    filledButtonTheme: _filledButtonThemeData
+    filledButtonTheme: _filledButtonThemeData,
   );
 
   static final ProgressIndicatorThemeData _progressIndicatorThemeData =
@@ -51,16 +49,19 @@ class AppTheme {
         ),
       );
 
-  static final FilledButtonThemeData _filledButtonThemeData = FilledButtonThemeData(
-    style: FilledButton.styleFrom(
-      backgroundColor: AppColors.themeColor,
-      foregroundColor: Colors.white,
-      fixedSize: Size.fromWidth(double.maxFinite),
-      padding: .symmetric(vertical: 10),
-      shape: RoundedRectangleBorder(
-        borderRadius: .circular(8),
-      ),
-      textStyle: TextStyle(fontWeight: FontWeight.w600, letterSpacing: .5, fontSize: 16)
-    ),
-  );
+  static final FilledButtonThemeData _filledButtonThemeData =
+      FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: AppColors.themeColor,
+          foregroundColor: Colors.white,
+          fixedSize: Size.fromWidth(double.maxFinite),
+          padding: .symmetric(vertical: 10),
+          shape: RoundedRectangleBorder(borderRadius: .circular(8)),
+          textStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            letterSpacing: .5,
+            fontSize: 16,
+          ),
+        ),
+      );
 }

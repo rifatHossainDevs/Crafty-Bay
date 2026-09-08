@@ -1,7 +1,6 @@
 import 'package:crafty_bay/features/auth/data/models/sign_in_params.dart';
 import 'package:crafty_bay/features/auth/presentation/providers/sign_in_provider.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screens.dart';
-import 'package:crafty_bay/features/auth/presentation/screens/verify_otp_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/widgets/app_logo.dart';
 import 'package:crafty_bay/features/shared/presentation/widget/centered_progress_indicator.dart';
 import 'package:crafty_bay/features/shared/presentation/widget/snack_bar_message.dart';
@@ -49,9 +48,9 @@ class _SignInScreensState extends State<SignInScreens> {
                     const SizedBox(height: 62),
                     const AppLogo(width: 100, height: 100),
                     const SizedBox(height: 16),
-                    Text("Welcome Back!", style: textTheme.titleLarge),
+                    Text(context.localization.welcomeBack, style: textTheme.titleLarge),
                     Text(
-                      "Please enter your email and password",
+                      context.localization.enterEmailAndPassword,
                       style: textTheme.labelLarge,
                     ),
                     const SizedBox(height: 24),
@@ -60,7 +59,7 @@ class _SignInScreensState extends State<SignInScreens> {
                       keyboardType: .emailAddress,
                       textInputAction: .next,
                       decoration: InputDecoration(
-                        hint: Text("Email"),
+                        hint: Text(context.localization.email),
                         suffixIcon: IconButton(
                           onPressed: () => _clearData(_emailTEController),
                           icon: Icon(Icons.cancel),
@@ -74,7 +73,7 @@ class _SignInScreensState extends State<SignInScreens> {
                       obscuringCharacter: '*',
                       controller: _passwordTEController,
                       decoration: InputDecoration(
-                        hint: Text("Password"),
+                        hint: Text(context.localization.password),
                         suffixIcon: IconButton(
                           onPressed: _changePasswordVisibility,
                           icon: isObscurePassword
@@ -94,7 +93,7 @@ class _SignInScreensState extends State<SignInScreens> {
                         }
                         return FilledButton(
                           onPressed: _onTapSignInButton,
-                          child: Text("Sign In"),
+                          child: Text(context.localization.signIn),
                         );
                       },
                     ),
@@ -104,12 +103,12 @@ class _SignInScreensState extends State<SignInScreens> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an Account?",
+                          context.localization.dontHaveAnAccount,
                           style: context.textTheme.labelLarge,
                         ),
                         TextButton(
                           onPressed: _onTapSignUpButton,
-                          child: Text("Sign Up"),
+                          child: Text(context.localization.signUp),
                         ),
                       ],
                     ),

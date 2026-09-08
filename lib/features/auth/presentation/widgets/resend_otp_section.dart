@@ -23,13 +23,13 @@ class _ResendOtpSectionState extends State<ResendOtpSection> {
               visible: resendOtpProvider.isTimerRunning,
               replacement: TextButton(
                 onPressed: _onTapResendButton,
-                child: Text("Resend OTP"),
+                child: Text(context.localization.resendOtp),
               ),
               child: Row(
                 mainAxisAlignment: .center,
                 children: [
                   Text(
-                    "Resend otp after ",
+                    context.localization.resendOtpAfter,
                     style: context.textTheme.labelLarge,
                   ),
 

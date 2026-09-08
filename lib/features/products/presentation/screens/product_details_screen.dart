@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
+import '../../../../app/extension/utility_extension.dart';
 import '../../../../app/providers/auth_controller.dart';
 import '../../../auth/presentation/screens/sign_in_screens.dart';
 import '../../../cart/data/models/add_to_cart_params.dart';
@@ -35,8 +36,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ProductDetailsProvider();
 
   final AddToCartProvider _addToCartProvider = AddToCartProvider();
-  final AddToWishlistProvider _addToWishlistProvider = AddToWishlistProvider();
-  final WishlistProvider _wishlistProvider = WishlistProvider();
 
   String? _selectedColor;
   String? _selectedSize;
@@ -45,7 +44,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   void initState() {
     _productDetailsProvider.getProductDetails(widget.productId);
-    _wishlistProvider.getWishListProducts();
     super.initState();
   }
 
@@ -54,7 +52,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
     if (isLoggedIn == false) {
       if (!mounted) return;
-      showSnackBarMessage(context, "Login first to add to wishlist");
+      showSnackBarMessage(context, context.localization.loginFirstToAddToWishlist);
       Navigator.pushNamed(context, SignInScreens.name);
       return;
     }
@@ -66,8 +64,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       return;
     }
     if (result) {
-      _wishlistProvider.refreshWishlistProductList();
-      showSnackBarMessage(context, "Product added to wishlist");
+      context.read<WishlistProvider>().refreshWishlistProductList();
+      showSnackBarMessage(context, context.localization.productAddedToWishlist);
     } else {
       showSnackBarMessage(context, addToWishlistProvider.errorMessage!);
     }
@@ -96,7 +94,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     }
 
     if (result) {
-      showSnackBarMessage(context, "Product added to cart");
+      showSnackBarMessage(context, context.localization.productAddedToCart);
     } else {
       showSnackBarMessage(context, _addToCartProvider.errorMessage!);
     }
@@ -104,28 +102,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: _productDetailsProvider),
         ChangeNotifierProvider.value(value: _addToCartProvider),
-        ChangeNotifierProvider.value(value: _addToWishlistProvider),
-        ChangeNotifierProvider.value(value: _wishlistProvider),
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Product Details"),
+          title: Text(context.localization.productDetails),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_ios_new),
+            icon: const Icon(Icons.arrow_back_ios_new),
           ),
         ),
-
         body: Consumer<ProductDetailsProvider>(
           builder: (context, _, _) {
             if (_productDetailsProvider.isLoading) {
-              return CenteredProgressIndicator();
+              return const CenteredProgressIndicator();
             }
 
             final productDetails = _productDetailsProvider.productDetailsModel!;
@@ -139,16 +136,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
-                            crossAxisAlignment: .start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 children: [
                                   Expanded(
                                     child: Text(
                                       productDetails.title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 18,
-                                        fontWeight: .w600,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
@@ -167,8 +164,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
                               Row(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: .spaceBetween,
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Icon(
                                         Icons.star,
@@ -178,7 +176,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       Text("4.8"),
                                     ],
                                   ),
-                                  SizedBox(width: 8),
+                                  const SizedBox(width: 8),
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pushNamed(
@@ -187,12 +185,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         arguments: widget.productId,
                                       );
                                     },
-                                    child: Text("Reviews"),
+                                    child: Text(context.localization.reviews),
                                   ),
                                   const SizedBox(width: 8),
                                   Card(
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: .circular(4),
+                                      borderRadius: BorderRadius.circular(4),
                                     ),
                                     color: AppColors.themeColor,
                                     child: Padding(
@@ -201,60 +199,42 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         onTap: () {
                                           _addToWishlist();
                                         },
+                                        child: Consumer2<AddToWishlistProvider,
+                                            WishlistProvider>(
+                                          builder: (context,
+                                              addToWishlistProvider,
+                                              wishlistProvider,
+                                              _) {
+                                            if (addToWishlistProvider
+                                                .isLoading) {
+                                              return const SizedBox(
+                                                height: 16,
+                                                width: 16,
+                                                child:
+                                                    CenteredProgressIndicator(),
+                                              );
+                                            }
 
-                                        child:
-                                            Consumer2<
-                                              AddToWishlistProvider,
-                                              WishlistProvider
-                                            >(
-                                              builder:
-                                                  (
-                                                    context,
-                                                    addToWishlistProvider,
-                                                    wishlistProvider,
-                                                    _,
-                                                  ) {
-                                                    if (addToWishlistProvider
-                                                        .isLoading) {
-                                                      return SizedBox(
-                                                        height: 16,
-                                                        width: 16,
-                                                        child:
-                                                            CenteredProgressIndicator(),
-                                                      );
-                                                    }
+                                            bool isFavorite = wishlistProvider
+                                                .isProductInWishlist(
+                                                    widget.productId);
 
-                                                    bool isFavorite =
-                                                        wishlistProvider
-                                                            .isProductInWishlist(
-                                                              widget.productId,
-                                                            );
-
-                                                    return Icon(
-                                                      isFavorite
-                                                          ? Icons.favorite
-                                                          : Icons
-                                                                .favorite_border,
-                                                      color: Colors.white,
-                                                      size: 16,
-                                                    );
-                                                  },
-                                            ),
+                                            return Icon(
+                                              isFavorite
+                                                  ? Icons.favorite
+                                                  : Icons.favorite_border,
+                                              color: Colors.white,
+                                              size: 16,
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-
                               const SizedBox(height: 16),
-                              Text(
-                                "Color",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black54,
-                                ),
-                              ),
+                              Text(context.localization.color, style: textTheme.labelLarge),
                               const SizedBox(height: 8),
                               ColorPicker(
                                 colors: productDetails.colors,
@@ -262,16 +242,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   _selectedColor = selectedColor;
                                 },
                               ),
-
                               const SizedBox(height: 16),
-                              Text(
-                                "Size",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black54,
-                                ),
-                              ),
+                              Text(context.localization.size, style: textTheme.labelLarge),
                               const SizedBox(height: 8),
                               SizePicker(
                                 sizes: productDetails.sizes,
@@ -280,20 +252,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   debugPrint(selectedSize);
                                 },
                               ),
-
                               const SizedBox(height: 16),
-                              Text(
-                                "Description",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black54,
-                                ),
-                              ),
+                              Text(context.localization.description, style: textTheme.labelLarge),
                               const SizedBox(height: 8),
                               Text(
                                 productDetails.description,
-                                style: TextStyle(color: Colors.black54),
+                                style: textTheme.bodySmall,
                               ),
                             ],
                           ),

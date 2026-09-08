@@ -21,33 +21,45 @@ class AppRoutes {
     switch (settings.name) {
       case SplashScreen.name:
         widget = SplashScreen();
+        break;
       case SignUpScreens.name:
         widget = SignUpScreens();
+        break;
       case VerifyOtpScreen.name:
         final email = settings.arguments as String;
         widget = VerifyOtpScreen(email: email);
+        break;
       case SignInScreens.name:
         widget = SignInScreens();
+        break;
       case MainNavHolderScreens.name:
         widget = MainNavHolderScreens();
+        break;
       case ProductsByCategoryScreen.name:
         final category = settings.arguments as CategoryModel;
         widget = ProductsByCategoryScreen(category: category);
+        break;
       case ProductDetailsScreen.name:
         final productID = settings.arguments as String;
         widget = ProductDetailsScreen(productId: productID);
+        break;
       case ReviewsScreen.name:
         final productID = settings.arguments as String;
         widget = ReviewsScreen(productId: productID,);
+        break;
       case AddNewReviewsScreen.name:
         final productID = settings.arguments as String;
         widget = AddNewReviewsScreen(productId: productID,);
+        break;
       case EditProfileScreen.name:
         widget = EditProfileScreen();
+        break;
       case BrandsScreen.name:
         widget = BrandsScreen();
+        break;
       case AboutScreen.name:
         widget = AboutScreen();
+        break;
     }
 
     return MaterialPageRoute(builder: (_) => widget);

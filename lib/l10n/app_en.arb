@@ -1,11 +1,97 @@
 {
   "version": "Version: 1.0.0",
-  "alreadyHaveAnAccount": "Already have an account?",
-  "signIn": "Sign in",
-  "next": "Next",
   "home": "Home",
   "category": "Category",
+  "categories": "Categories",
   "cart": "Cart",
-  "wishlist": "Wishlist"
+  "wishlist": "Wishlist",
+  "yes": "Yes",
+  "no": "No",
+  "seeAll": "See All",
+  "pressBackAgainToExit": "Press back again to exit",
+  "noUserNameFound": "No User Name Found",
+  "noUserEmailFound": "No User Email Found",
+  "theme": "Theme",
+  "language": "Language",
+  "logout": "Logout",
+  "logoutDescription": "Do you want to logout?",
 
+  "welcomeBack": "Welcome Back!",
+  "enterEmailAndPassword": "Please enter your email and password",
+  "email": "Email",
+  "password": "Password",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "dontHaveAnAccount": "Don't have an Account?",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "getStartedWithDetails": "Get started with us with your details",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "mobile": "Mobile",
+  "city": "City",
+  "enterYourFirstName": "Enter your first name",
+  "enterYourLastName": "Enter your last name",
+  "enterYourPhoneNumber": "Enter your phone number",
+  "enterYourCity": "Enter your city name",
+  "verifyOtp": "Verify OTP",
+  "otpCodeSent": "A 4 Digit OTP Code has been Sent",
+  "next": "Next",
+  "resendOtp": "Resend OTP",
+  "resendOtpAfter": "Resend otp after ",
+  "editProfile": "Edit Profile",
+  "update": "Update",
+  "profileUpdatedSuccessfully": "Profile Updated Successfully",
+
+  "searchHint": "Search...",
+  "popular": "Popular",
+  "special": "Special",
+  "newArrival": "New",
+
+  "productDetails": "Product Details",
+  "color": "Color",
+  "size": "Size",
+  "description": "Description",
+  "price": "Price",
+  "addToCart": "Add to Cart",
+  "reviews": "Reviews",
+  "reviewsWithCount": "Reviews ({count})",
+  "@reviewsWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "createReview": "Create Reviews",
+  "writeReview": "Write Review",
+  "submit": "Submit",
+  "reviewAddedSuccessfully": "Review added successfully",
+  "pleaseEnterFirstName": "Please enter your first name",
+  "pleaseEnterLastName": "Please enter your last name",
+  "pleaseEnterReview": "Please enter your review",
+  "loginFirstToAddToWishlist": "Login first to add to wishlist",
+  "productAddedToWishlist": "Product added to wishlist",
+  "productAddedToCart": "Product added to cart",
+
+  "totalPrice": "Total Price",
+  "checkout": "Checkout",
+  "totalProducts": "Total Products: {count}",
+  "@totalProducts": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noProductsFound": "No Products Found",
+
+  "brands": "Brands",
+  "about": "About",
+  "craftyBayAboutDescription": "Crafty Bay is a premium e-commerce platform that offers a wide variety of high-quality products. Our mission is to provide a seamless and enjoyable shopping experience for our customers, ensuring they find exactly what they need at the best prices.",
+  "officialWebsite": "Official Website",
+  "privacyPolicy": "Privacy Policy",
+  "readPrivacyGuidelines": "Read our privacy guidelines",
+  "termsAndConditions": "Terms & Conditions",
+  "reviewServiceTerms": "Review our service terms",
+  "allRightsReserved": "All rights reserved."
 }

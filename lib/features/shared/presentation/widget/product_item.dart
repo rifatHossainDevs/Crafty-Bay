@@ -1,18 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crafty_bay/features/shared/presentation/widget/snack_bar_message.dart';
-import 'package:crafty_bay/features/wishlist/data/models/wishlist_param.dart';
-import 'package:crafty_bay/features/wishlist/presentation/providers/add_to_wishlist_provider.dart';
-import 'package:crafty_bay/features/wishlist/presentation/providers/wishlist_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../app/app_colors.dart';
 import '../../../../app/constants.dart';
+import '../../../../app/extension/utility_extension.dart';
 import '../../../../app/providers/auth_controller.dart';
 import '../../../auth/presentation/screens/sign_in_screens.dart';
 import '../../../products/data/models/product_model.dart';
 import '../../../products/presentation/screens/product_details_screen.dart';
-import 'centered_progress_indicator.dart';
+import '../../../wishlist/data/models/wishlist_param.dart';
+import '../../../wishlist/presentation/providers/add_to_wishlist_provider.dart';
+import '../../../wishlist/presentation/providers/wishlist_provider.dart';
 import 'no_image.dart';
 
 class ProductItem extends StatelessWidget {
@@ -47,18 +47,21 @@ class ProductItem extends StatelessWidget {
                 ),
               ),
               child: ClipRRect(
-                borderRadius: .circular(8),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(8),
+                ),
                 child: CachedNetworkImage(
                   height: 110,
                   imageUrl: _getPhotoPath(productModel.photos),
                   fit: BoxFit.cover,
                   errorWidget: (_, _, _) => const NoImage(),
-                  progressIndicatorBuilder: (_, _, _) => const NoImage(),
+                  placeholder: (_, _) => const NoImage(),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(6),
+              padding: const EdgeInsets.all(4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -66,31 +69,34 @@ class ProductItem extends StatelessWidget {
                     productModel.title,
                     maxLines: 1,
                     style: const TextStyle(
-                      fontSize: 13,
+                      fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: Colors.black54,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  const SizedBox(height: 2),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '${Constants.takaSign}${productModel.currentPrice}',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.themeColor,
+                      Flexible(
+                        child: Text(
+                          '${Constants.takaSign}${productModel.currentPrice}',
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.themeColor,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
+                      Row(
                         children: [
-                          const Icon(Icons.star, size: 14, color: Colors.amber),
+                          const Icon(Icons.star, size: 12, color: Colors.amber),
                           Text(
                             '${productModel.rating}',
                             style: const TextStyle(
-                              fontSize: 12,
+                              fontSize: 10,
                               fontWeight: FontWeight.w400,
                               color: Colors.black45,
                             ),
@@ -117,11 +123,15 @@ class ProductItem extends StatelessWidget {
 
                           if (result) {
                             wishlistProvider.refreshWishlistProductList();
-                            showSnackBarMessage(
-                                context, "Product added to wishlist");
+                            if (context.mounted) {
+                              showSnackBarMessage(
+                                  context, context.localization.productAddedToWishlist);
+                            }
                           } else {
-                            showSnackBarMessage(
-                                context, addToWishlistProvider.errorMessage!);
+                            if (context.mounted) {
+                              showSnackBarMessage(
+                                  context, addToWishlistProvider.errorMessage!);
+                            }
                           }
                         },
                         child: Card(
@@ -174,6 +184,6 @@ class ProductItem extends StatelessWidget {
   }
 
   String _getPhotoPath(List<String> photos) {
-    return photos.length > 0 ? photos.first : '';
+    return photos.isNotEmpty ? photos.first : '';
   }
 }

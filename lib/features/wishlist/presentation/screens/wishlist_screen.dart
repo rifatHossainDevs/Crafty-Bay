@@ -1,4 +1,5 @@
 import 'package:crafty_bay/app/app_colors.dart';
+import 'package:crafty_bay/app/extension/utility_extension.dart';
 import 'package:crafty_bay/features/shared/presentation/providers/main_nav_holder_provider.dart';
 import 'package:crafty_bay/features/shared/presentation/widget/centered_progress_indicator.dart';
 import 'package:crafty_bay/features/shared/presentation/widget/product_item.dart';
@@ -39,7 +40,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("WishList"),
+        title: Text(context.localization.wishlist),
         leading: IconButton(
           onPressed: () {
             context.read<MainNavHolderProvider>().backToHome();
@@ -56,9 +57,9 @@ class _WishlistScreenState extends State<WishlistScreen> {
             }
 
             if (wishlistProvider.wishListProducts.isEmpty) {
-              return const Center(
-                child: Text("No Products Found",
-                    style: TextStyle(fontSize: 20, color: Colors.grey)),
+              return Center(
+                child: Text(context.localization.noProductsFound,
+                    style: const TextStyle(fontSize: 20, color: Colors.grey)),
               );
             }
 
@@ -66,7 +67,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Total Products: ${wishlistProvider.wishListProducts.length}",
+                  context.localization.totalProducts(wishlistProvider.wishListProducts.length),
                   style: const TextStyle(fontSize: 16, color: AppColors.themeColor),
                 ),
                 const SizedBox(height: 8),

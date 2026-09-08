@@ -1,6 +1,8 @@
 import 'package:crafty_bay/app/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../app/extension/utility_extension.dart';
+
 class HomeSectionHeader extends StatelessWidget {
   const HomeSectionHeader({
     super.key,
@@ -20,7 +22,7 @@ class HomeSectionHeader extends StatelessWidget {
           title,
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
-        TextButton(onPressed: onTapSeeAll, child: Text("See All", style: TextStyle(color: AppColors.themeColor),)),
+        TextButton(onPressed: onTapSeeAll, child: Text(context.localization.seeAll, style: TextStyle(color: AppColors.themeColor),)),
       ],
     );
   }

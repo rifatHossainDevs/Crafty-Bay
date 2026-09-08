@@ -10,9 +10,10 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("About"),
+        title: Text(context.localization.about),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -45,34 +46,30 @@ class AboutScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              const Text(
-                """Crafty Bay is a premium e-commerce platform that offers a wide variety of high-quality products. Our mission is to provide a seamless and enjoyable shopping experience for our customers, ensuring they find exactly what they need at the best prices.""",
+              Text(
+                context.localization.craftyBayAboutDescription,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black87,
-                  height: 1.5,
-                ),
+                style: textTheme.labelLarge,
               ),
               const SizedBox(height: 40),
               _buildAboutItem(
                 icon: Icons.language,
-                title: "Official Website",
+                title: context.localization.officialWebsite,
                 subtitle: "www.craftybay.com",
                 onTap: () {},
               ),
               const Divider(),
               _buildAboutItem(
                 icon: Icons.privacy_tip_outlined,
-                title: "Privacy Policy",
-                subtitle: "Read our privacy guidelines",
+                title: context.localization.privacyPolicy,
+                subtitle: context.localization.readPrivacyGuidelines,
                 onTap: () {},
               ),
               const Divider(),
               _buildAboutItem(
                 icon: Icons.description_outlined,
-                title: "Terms & Conditions",
-                subtitle: "Review our service terms",
+                title: context.localization.termsAndConditions,
+                subtitle: context.localization.reviewServiceTerms,
                 onTap: () {},
               ),
               const SizedBox(height: 50),
@@ -83,9 +80,9 @@ class AboutScreen extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
-              const Text(
-                "All rights reserved.",
-                style: TextStyle(
+              Text(
+                context.localization.allRightsReserved,
+                style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 14,
                 ),
