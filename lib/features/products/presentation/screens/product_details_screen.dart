@@ -79,7 +79,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       Navigator.pushNamed(context, SignInScreens.name);
       return;
     }
-
+    debugPrint("$_quantity");
     final bool result = await _addToCartProvider.addToCart(
       AddToCartParams(
         productId: widget.productId,

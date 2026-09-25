@@ -7,6 +7,7 @@ import '../features/auth/presentation/screens/splash_screen.dart';
 import '../features/auth/presentation/screens/verify_otp_screen.dart';
 import '../features/brands/presentation/screens/brands_screen.dart';
 import '../features/category/data/models/category_model.dart';
+import '../features/order/presentation/screens/order_screen.dart';
 import '../features/products/presentation/screens/product_details_screen.dart';
 import '../features/products/presentation/screens/products_by_category_screen.dart';
 import '../features/reviews/presentation/screens/add_new_reviews_screen.dart';
@@ -59,6 +60,9 @@ class AppRoutes {
         break;
       case AboutScreen.name:
         widget = AboutScreen();
+        break;
+      case OrderScreen.name:
+        widget = OrderScreen();
         break;
     }
 

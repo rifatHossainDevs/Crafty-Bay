@@ -36,4 +36,6 @@ class Urls {
   static const String getUpdateUserUrl = '$_baseUrl/auth/profile';
 
   static const String getBrandsUrl = '$_baseUrl/brands';
+
+  static const String createOrderUrl = '$_baseUrl/order';
 }

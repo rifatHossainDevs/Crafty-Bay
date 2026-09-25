@@ -1,4 +1,5 @@
 import 'package:crafty_bay/features/cart/presentation/providers/cart_item_provider.dart';
+import 'package:crafty_bay/features/order/presentation/screens/order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +31,10 @@ class _TotalPriceAndCheckoutSectionState
           Column(
             crossAxisAlignment: .start,
             children: [
-              Text(context.localization.totalPrice, style: TextStyle(fontWeight: .w600)),
+              Text(
+                context.localization.totalPrice,
+                style: TextStyle(fontWeight: .w600),
+              ),
               Text(
                 '${Constants.takaSign}${context.read<CartItemProvider>().totalPrice()}',
                 style: TextStyle(
@@ -43,7 +47,12 @@ class _TotalPriceAndCheckoutSectionState
           ),
           SizedBox(
             width: 120,
-            child: FilledButton(onPressed: () {}, child: Text(context.localization.checkout)),
+            child: FilledButton(
+              onPressed: () {
+                Navigator.pushNamed(context, OrderScreen.name);
+              },
+              child: Text(context.localization.checkout),
+            ),
           ),
         ],
       ),
