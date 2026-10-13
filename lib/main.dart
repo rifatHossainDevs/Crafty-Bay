@@ -1,10 +1,3 @@
-import 'package:crafty_bay/app/providers/locale_provider.dart';
-import 'package:crafty_bay/app/providers/theme_provider.dart';
-import 'package:crafty_bay/features/shared/presentation/providers/main_nav_holder_provider.dart';
-import 'package:crafty_bay/features/auth/presentation/providers/sign_up_provider.dart';
-import 'package:crafty_bay/features/auth/presentation/providers/verify_otp_provider.dart';
-import 'package:crafty_bay/features/wishlist/presentation/providers/add_to_wishlist_provider.dart';
-import 'package:crafty_bay/features/wishlist/presentation/providers/wishlist_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -12,6 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app/crafty_bay_app.dart';
+import 'app/providers/locale_provider.dart';
+import 'app/providers/theme_provider.dart';
+import 'features/auth/presentation/providers/sign_up_provider.dart';
+import 'features/auth/presentation/providers/verify_otp_provider.dart';
+import 'features/shared/presentation/providers/main_nav_holder_provider.dart';
+import 'features/wishlist/presentation/providers/add_to_wishlist_provider.dart';
+import 'features/wishlist/presentation/providers/wishlist_provider.dart';
 import 'firebase_options.dart';
 
 // Initialization FVM -> Done
